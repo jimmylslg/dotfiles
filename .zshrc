@@ -101,6 +101,10 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias n=nvim
+if type nvim > /dev/null 2>&1; then
+  alias vim='nvim'
+fi
 alias editvim='vim ~/.vimrc'
 alias editzsh='vim ~/.zshrc'
 alias ll='ls -lGh'
