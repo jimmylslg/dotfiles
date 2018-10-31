@@ -15,7 +15,11 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'scrooloose/nerdtree'
 Plugin 'kien/ctrlp.vim'
 Plugin 'vim-airline/vim-airline'
-Plugin 'davidhalter/jedi-vim'
+" Plugin 'davidhalter/jedi-vim'
+if has('nvim')
+    Plugin 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } 
+    Plugin 'zchee/deoplete-jedi'
+endif
 Plugin 'python-mode/python-mode'
 Plugin 'ervandew/supertab'
 
@@ -71,6 +75,8 @@ if exists('+termguicolors')
     let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
     set termguicolors
 endif
+
+" Enable syntax
 syntax on
 
 let g:material_theme_style = 'dark'
@@ -79,6 +85,9 @@ set background=dark
 " colorscheme hybrid_material
 " colorscheme hybrid_reverse
 colorscheme material
+
+" Git diff shows vertical split
+set diffopt+=vertical
 
 " enable mouse click
 set mouse=a
@@ -155,7 +164,7 @@ let g:ctrlp_custom_ignore = {
   \ }
 
 " Jedi-vim Settings
-let g:jedi#force_py_version=3
+" let g:jedi#force_py_version=3
 
 " Python-mode Settings
 let g:pymode = 1
