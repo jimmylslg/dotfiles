@@ -6,6 +6,7 @@ echo ""
 
 mkdir -p ~/.dotfiles_bak
 mkdir -p ~/.vim/undodir
+mkdir -p ~/.config/nvim
 
 echo ""
 echo "*** Backing up existing dotfiles"
@@ -17,6 +18,10 @@ cp ~/.vimrc ~/.dotfiles_bak
 unlink ~/.vimrc
 cp ~/.zshrc ~/.dotfiles_bak
 unlink ~/.zshrc
+cp ~/.gitconfig ~/.dotfiles_bak
+unlink ~/.gitconfig
+cp ~/.config/nvim/init.vim ~/.dotfiles_bak
+unlink ~/.config/nvim/init.vim
 
 echo ""
 echo "*** Finished bakcing up"
@@ -53,6 +58,8 @@ echo ""
 ln -sf ~/dotfiles/.tmux.conf ~/.tmux.conf
 ln -sf ~/dotfiles/.vimrc ~/.vimrc
 ln -sf ~/dotfiles/.zshrc ~/.zshrc
+ln -sf ~/dotfiles/.gitconfig ~/.gitconfig
+ln -sf ~/Dotfiles/init.vim ~/.config/nvim/init.vim
 
 echo ""
 echo "*** dotfiles are the latest now!"
