@@ -1,4 +1,4 @@
-cd ~
+#!/bin/sh
 
 echo ""
 echo "============= Dotfiles ============="
@@ -22,23 +22,19 @@ echo ""
 echo "*** Finished bakcing up"
 echo "" 
 
-
 echo ""
 echo "============= Plugins ============="
 echo "" 
- 
 
-# Install oh-my-zsh
+# Install oh-my-zsh (no interruption)
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sed 's:env zsh::g' | sed 's:chsh -s .*$::g')"
  
 export ZSH_CUSTOM=$HOME/.oh-my-zsh/custom
 export SHELL=/bin/zsh
 
-#Plugin Installs
- 
+# Install Vundle 
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim 
 
-# zsh_autosuggestions
 # zsh_autosuggestions
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
  
@@ -62,7 +58,10 @@ echo ""
 echo "*** dotfiles are the latest now!"
 echo "" 
 
+# Install Vundle PlugIns
 echo | echo | vim +PluginInstall +qall
+
+# Set ZSH to be default shell
 chsh -s /bin/zsh
 
 echo ""
