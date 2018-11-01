@@ -15,3 +15,4 @@ let g:deoplete#sources#jedi#show_docstring = 1
 let g:deoplete#enable_ignore_case = 1
 let g:deoplete#enable_smart_case = 1
 let g:deoplete#sources#jedi#enable_typeinfo = 0
+
