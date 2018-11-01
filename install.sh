@@ -67,6 +67,7 @@ echo ""
 
 # Install Vundle PlugIns
 echo | echo | vim +PluginInstall +qall
+echo | echo | nvim +PluginInstall +qall
 
 # Set ZSH to be default shell
 chsh -s /bin/zsh
