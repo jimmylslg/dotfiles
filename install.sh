@@ -37,8 +37,9 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/mas
 export ZSH_CUSTOM=$HOME/.oh-my-zsh/custom
 export SHELL=/bin/zsh
 
-# Install Vundle 
-git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim 
+# Install Vim Plug 
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 # zsh_autosuggestions
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
@@ -66,8 +67,8 @@ echo "*** dotfiles are the latest now!"
 echo "" 
 
 # Install Vundle PlugIns
-echo | echo | vim +PluginInstall +qall
-echo | echo | nvim +PluginInstall +qall
+echo | echo | vim +PlugInstall +qall
+echo | echo | nvim +PlugInstall +qall
 
 # Set ZSH to be default shell
 chsh -s /bin/zsh
