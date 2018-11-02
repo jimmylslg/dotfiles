@@ -240,6 +240,7 @@ let g:ale_python_flake8_options='--ignore=E501 --max-line-length=120'
 let g:ale_python_pylint_options='--max-line-length=120'
 let g:ale_sign_error = 'EE'
 let g:ale_sign_warning = 'WW'
+let g:ale_sign_column_always = 1
 
 " Gitgutter Settings
 let g:gitgutter_map_keys = 0  " To disable all key mappings:
