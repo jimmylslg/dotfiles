@@ -4,7 +4,7 @@
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 export SHELL=/bin/zsh
-export TERM="xterm-256color"
+# export TERM="xterm-256color"
 
 # load ~/.zshrc.local if exists
 [[ -s $HOME/.zshrc.local ]] && source "$HOME/.zshrc.local"
