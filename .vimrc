@@ -25,7 +25,8 @@ Plugin 'ervandew/supertab'
 Plugin 'tpope/vim-surround'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'w0rp/ale'
-Plugin 'airblade/vim-gitgutter'
+" Plugin 'airblade/vim-gitgutter'
+Plugin 'mhinz/vim-signify'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'Yggdroot/indentLine'
 " Plugin 'junegunn/fzf.vim'
@@ -259,3 +260,10 @@ let g:multi_cursor_select_all_key      = 'g<C-n>'
 "let g:multi_cursor_quit_key            = '<Esc>'
 let g:multi_cursor_exit_from_insert_mode=0
 
+ " Signify Settings
+let g:signify_realtime = 1
+let g:signify_cursorhold_insert     = 1
+let g:signify_cursorhold_normal     = 1
+let g:signify_update_on_bufenter    = 1
+let g:signify_update_on_focusgained = 1
+let g:signify_vcs_list = [ 'git' ]
