@@ -1,5 +1,19 @@
 #!/bin/sh
 
+#   #   #   #   #   #   #   #   #   #   #   #   #   #   
+#
+#           Things to do for new setup:
+#
+#   1: nvim should be installed and available in $PATH
+#   2: virtualenv with Ptyhon3 should be created under
+#       $HOME/.config/nvim/neovim_env
+#   3: Pip3 in $PATH should installs Autopep8, flake8
+#       pylint in case needed
+#   4: Tmux is a plus
+#
+#   #   #   #   #   #   #   #   #   #   #   #   #   #   
+
+
 echo ""
 echo "============= Dotfiles ============="
 echo "" 
