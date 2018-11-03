@@ -5,29 +5,33 @@ call plug#begin('~/.vim/plugged')
 
 " Plugins
 Plug 'tpope/vim-fugitive'
-Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'kien/ctrlp.vim'
 Plug 'vim-airline/vim-airline'
-Plug 'davidhalter/jedi-vim'
+Plug 'davidhalter/jedi-vim', { 'for': 'python' }
 if has('nvim')
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } 
-    Plug 'zchee/deoplete-jedi'
+    Plug 'Shougo/deoplete.nvim', { 
+                \'do': ':UpdateRemotePlugins',
+                \'for': 'python'
+                \} 
+    Plug 'zchee/deoplete-jedi', { 'for': 'python' }
 endif
 " Plug 'python-mode/python-mode'
 Plug 'ervandew/supertab'
 Plug 'tpope/vim-surround'
 Plug 'terryma/vim-multiple-cursors'
-Plug 'w0rp/ale'
+Plug 'w0rp/ale', { 'for': 'python' }
 " Plug 'airblade/vim-gitgutter'
 Plug 'mhinz/vim-signify'
 Plug 'jiangmiao/auto-pairs'
 Plug 'Yggdroot/indentLine'
-" Plug 'junegunn/fzf.vim'
+ Plug 'junegunn/fzf.vim'
+Plug 'skywind3000/asyncrun.vim'
 
 " Themes
-Plug 'jdkanani/vim-material-theme'
-Plug 'kaicataldo/material.vim'
-Plug 'kristijanhusak/vim-hybrid-material'
+" Plug 'jdkanani/vim-material-theme'
+" Plug 'kaicataldo/material.vim'
+" Plug 'kristijanhusak/vim-hybrid-material'
 Plug 'liuchengxu/space-vim-dark' 
 
 " Initialize plugin system
@@ -87,6 +91,9 @@ set autoread
 " Set split orientation
 set splitbelow
 set splitright
+
+" Set side column to be on all the time
+set signcolumn=yes
 
 "Always show current position
 set ruler
@@ -156,22 +163,28 @@ autocmd BufReadPost *
 " center buffer around cursor when opening files
 autocmd BufRead * normal zz
 
+" Close quickfix when quit
+autocmd bufwinenter quickfix nnoremap <silent> <buffer>
+                \   q :cclose<cr>:lclose<cr>
+autocmd bufenter * if (winnr('$') == 1 && &buftype ==# 'quickfix' ) |
+                \   bd|
+                \   q | endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Plugins Settings
+" => plugins settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" NerdTree Settings
+" ====> NerdTree Settings
 map <C-t> :NERDTreeToggle<CR>
 let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
 
-" Ctrlp Settings
+" ====> Ctrlp Settings
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/](\.git|env|\.hg|CVS|\.svn)$',
   \ 'file': '\v\.(a|class|db|dll|DS_Store|dylib|exe|idb|lib|ncb|o|obj|pdb|psd|pyc|pyo|sdf|so|sublime-workspace|suo|swp|zip)$',
   \ }
 
-" Jedi-vim Settings
+" ====> Jedi-vim Settings
 " let g:jedi#force_py_version=3
 let g:jedi#auto_initialization = 1
 let g:jedi#auto_vim_configuration = 0
@@ -190,7 +203,7 @@ let g:jedi#usages_command = "<leader>n"
 let g:jedi#use_tabs_not_buffers = 1  " Open in newtab instead
 let g:jedi#force_py_version=3
 
-" Python-mode Settings
+" ====> Python-mode Settings
 " let g:pymode = 1
 " let g:pymode_breakpoint = 0
 " let g:pymode_virtualenv = 1
@@ -211,7 +224,7 @@ let g:jedi#force_py_version=3
 " let g:pymode_trim_whitespaces = 1 "Trim unused white spaces on save
 
 
-" Ale Settings
+" ====> Ale Settings
 " let g:ale_python_flake8_executable = 'flake8'
 let g:ale_completion_enabled = 0
 let g:ale_fix_on_save = 1
@@ -220,31 +233,35 @@ let g:ale_lint_on_enter = 0
 let g:ale_linters = {'python': ['flake8', 'pylint']}
 let g:ale_python_flake8_options='--ignore=E501 --max-line-length=120'
 let g:ale_python_pylint_options='--max-line-length=120'
-let g:ale_sign_error = 'EE'
-let g:ale_sign_warning = 'WW'
+let g:ale_python_autopep8_options='--max-line-length=120'
+let g:ale_sign_error = 'E'
+let g:ale_sign_warning = 'W'
 let g:ale_sign_column_always = 1
+let g:ale_echo_msg_format = '[%linter%] %code: %%s'
 
-" Gitgutter Settings
+" ====> Gitgutter Settings
 let g:gitgutter_map_keys = 0  " To disable all key mappings:
 
-"  vim-multiple-cursors Settings
-"let g:multi_cursor_use_default_mapping=0
-"
-"" Default mapping
+" ====> vim-multiple-cursors Settings
 let g:multi_cursor_start_word_key      = '<C-n>'
-"let g:multi_cursor_select_all_word_key = '<A-n>'
-"let g:multi_cursor_start_key           = 'g<C-n>'
 let g:multi_cursor_select_all_key      = 'g<C-n>'
-"let g:multi_cursor_next_key            = '<C-n>'
-"let g:multi_cursor_prev_key            = '<C-p>'
-"let g:multi_cursor_skip_key            = '<C-x>'
-"let g:multi_cursor_quit_key            = '<Esc>'
-let g:multi_cursor_exit_from_insert_mode=0
+let g:multi_cursor_next_key            = '<C-n>'
+let g:multi_cursor_prev_key            = '<C-p>'
+let g:multi_cursor_skip_key            = '<C-x>'
+let g:multi_cursor_quit_key            = '<Esc>'
+hi! clear SpellBad
+hi! clear SpellCap
+hi! clear SpellRare
+hi! SpellBad gui=undercurl guisp=red
+hi! SpellCap gui=undercurl guisp=blue
+hi! SpellRare gui=undercurl guisp=magenta
 
- " Signify Settings
+ " ====> Signify Settings
 let g:signify_realtime = 1
-let g:signify_cursorhold_insert     = 1
-let g:signify_cursorhold_normal     = 1
-let g:signify_update_on_bufenter    = 1
-let g:signify_update_on_focusgained = 1
 let g:signify_vcs_list = [ 'git' ]
+
+" ====> AsyncRun Settings
+let g:asyncrun_open = 8
+let g:asyncrun_bell = 1
+noremap <F9> :call asyncrun#quickfix_toggle(8)<cr> 
+
