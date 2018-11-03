@@ -16,3 +16,4 @@ let g:deoplete#enable_ignore_case = 1
 let g:deoplete#enable_smart_case = 1
 let g:deoplete#sources#jedi#enable_typeinfo = 1
 let g:deoplete#auto_complete_delay = 0
+let g:deoplete#ignore_sources = {'_': ['around', 'buffer' ]}
