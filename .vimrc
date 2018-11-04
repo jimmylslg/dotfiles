@@ -58,15 +58,10 @@ endif
 " Set 7 lines to the cursor - when moving vertically using j/k
 set so=7
 
-" "Code folding
-"set foldmethod=indent
-"set foldlevel=99
-"nnoremap <space> za
-
 "Color related
 if exists('+termguicolors')
-    let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
-    let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
+    " let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
+    " let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
     set termguicolors
 endif
 
@@ -227,6 +222,7 @@ let g:jedi#force_py_version=3
 " ====> Ale Settings
 " let g:ale_python_flake8_executable = 'flake8'
 let g:ale_completion_enabled = 0
+let g:ale_linters_explicit = 1
 let g:ale_fix_on_save = 1
 let g:ale_fixers = {'python': ['autopep8']}
 let g:ale_lint_on_enter = 0
@@ -238,6 +234,9 @@ let g:ale_sign_error = 'E'
 let g:ale_sign_warning = 'W'
 let g:ale_sign_column_always = 1
 let g:ale_echo_msg_format = '[%linter%] %code: %%s'
+let g:ale_lint_on_insert_leave = 1
+let g:ale_lint_on_text_changed = 'normal'
+let g:airline#extensions#ale#enabled = 1
 
 " ====> Gitgutter Settings
 let g:gitgutter_map_keys = 0  " To disable all key mappings:

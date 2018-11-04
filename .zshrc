@@ -5,6 +5,7 @@
 export ZSH=$HOME/.oh-my-zsh
 export SHELL=/bin/zsh
 # export TERM="xterm-256color"
+# export COLORTERM="truecolor"
 
 # load ~/.zshrc.local if exists
 [[ -s $HOME/.zshrc.local ]] && source "$HOME/.zshrc.local"
@@ -109,6 +110,7 @@ if type nvim > /dev/null 2>&1; then
 fi
 alias editvim='vim ~/.vimrc'
 alias editzsh='vim ~/.zshrc'
+alias edittmux='vim ~/.tmux.conf'
 alias ll='ls -lGh'
 alias gs='git status'
 alias gd='git diff'
