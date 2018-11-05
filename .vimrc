@@ -6,7 +6,6 @@ call plug#begin('~/.vim/plugged')
 " Plugins
 Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-Plug 'kien/ctrlp.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'davidhalter/jedi-vim', { 'for': 'python' }
 if has('nvim')
@@ -16,17 +15,16 @@ if has('nvim')
                 \} 
     Plug 'zchee/deoplete-jedi', { 'for': 'python' }
 endif
-" Plug 'python-mode/python-mode'
 Plug 'ervandew/supertab'
 Plug 'tpope/vim-surround'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'w0rp/ale', { 'for': 'python' }
-" Plug 'airblade/vim-gitgutter'
 Plug 'mhinz/vim-signify'
 Plug 'jiangmiao/auto-pairs'
 Plug 'Yggdroot/indentLine'
  Plug 'junegunn/fzf.vim'
 Plug 'skywind3000/asyncrun.vim'
+Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 
 " Themes
 " Plug 'jdkanani/vim-material-theme'
@@ -78,6 +76,13 @@ set background=dark
 colorscheme space-vim-dark
 hi Comment cterm=italic
 
+" Spell Color related
+hi! clear SpellBad
+hi! clear SpellCap
+hi! clear SpellRare
+hi! SpellBad gui=undercurl guisp=red
+hi! SpellCap gui=undercurl guisp=blue
+hi! SpellRare gui=undercurl guisp=magenta
 
 " highlight current line
 set cursorline
@@ -250,18 +255,13 @@ let g:airline#extensions#ale#enabled = 1
 let g:gitgutter_map_keys = 0  " To disable all key mappings:
 
 " ====> vim-multiple-cursors Settings
+let g:multi_cursor_use_default_mapping=0
 let g:multi_cursor_start_word_key      = '<C-n>'
 let g:multi_cursor_select_all_key      = 'g<C-n>'
 let g:multi_cursor_next_key            = '<C-n>'
 let g:multi_cursor_prev_key            = '<C-p>'
 let g:multi_cursor_skip_key            = '<C-x>'
 let g:multi_cursor_quit_key            = '<Esc>'
-hi! clear SpellBad
-hi! clear SpellCap
-hi! clear SpellRare
-hi! SpellBad gui=undercurl guisp=red
-hi! SpellCap gui=undercurl guisp=blue
-hi! SpellRare gui=undercurl guisp=magenta
 
  " ====> Signify Settings
 let g:signify_realtime = 1
@@ -272,3 +272,23 @@ let g:asyncrun_open = 8
 let g:asyncrun_bell = 1
 noremap <F9> :call asyncrun#quickfix_toggle(8)<cr> 
 
+" ====> LeaderF Settings
+let g:Lf_ShortcutF = '<C-P>'
+let g:Lf_RootMarkers = ['.project', '.root', '.svn', '.git']
+let g:Lf_CacheDirectory = expand('~/.vim/cache')
+let g:Lf_ShortcutB = '<m-n>'
+noremap <a-r> :LeaderfMru<cr>
+noremap <a-f> :LeaderfFunction!<cr>
+noremap <a-b> :LeaderfBuffer<cr>
+noremap <a-t> :LeaderfTag<cr>
+let g:Lf_WorkingDirectoryMode = 'Ac'
+let g:Lf_WildIgnore = {
+            \ 'dir': ['.svn','.git','.hg', 'env'],
+            \ 'file': ['*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]']
+            \}
+
+" ====> AutoPairs Settings
+let g:AutoPairsShortcutToggle = ''
+let g:AutoPairsShortcutFastWrap = ''
+let g:AutoPairsShortcutJump = ''
+let g:AutoPairsShortcutBackInsert = ''
