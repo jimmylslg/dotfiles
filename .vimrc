@@ -46,6 +46,10 @@ set nobackup
 set nowb
 set noswapfile
 
+" Enable filetype plugins
+filetype plugin on
+filetype indent on
+
 " Sets how many lines of history VIM has to remember
 set history=5000
 
@@ -73,6 +77,10 @@ set background=dark
 " colorscheme material
 colorscheme space-vim-dark
 hi Comment cterm=italic
+
+
+" highlight current line
+set cursorline
 
 " Git diff shows vertical split
 set diffopt+=vertical
