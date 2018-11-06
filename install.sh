@@ -10,6 +10,8 @@
 #   3: Pip3 in $PATH should installs Autopep8, flake8
 #       pylint in case needed
 #   4: Tmux is a plus
+#   5: Install latest Universal Ctags
+#        Link: https://github.com/universal-ctags/ctags
 #
 #   #   #   #   #   #   #   #   #   #   #   #   #   #   
 

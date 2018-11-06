@@ -11,7 +11,6 @@ Plug 'davidhalter/jedi-vim', { 'for': 'python' }
 if has('nvim')
     Plug 'Shougo/deoplete.nvim', { 
                 \'do': ':UpdateRemotePlugins',
-                \'for': 'python'
                 \} 
     Plug 'zchee/deoplete-jedi', { 'for': 'python' }
 endif
@@ -25,6 +24,7 @@ Plug 'Yggdroot/indentLine'
  Plug 'junegunn/fzf.vim'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
+Plug 'ludovicchabant/vim-gutentags'
 
 " Themes
 " Plug 'jdkanani/vim-material-theme'
@@ -196,7 +196,6 @@ let g:ctrlp_custom_ignore = {
 " let g:jedi#force_py_version=3
 let g:jedi#auto_initialization = 1
 let g:jedi#auto_vim_configuration = 0
-
 " Using deoplete-jedi instead
 let g:jedi#completions_command = ""
 let g:jedi#completions_enabled = 0 
@@ -286,9 +285,46 @@ let g:Lf_WildIgnore = {
             \ 'dir': ['.svn','.git','.hg', 'env'],
             \ 'file': ['*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]']
             \}
+let g:Lf_HideHelp = 1
+let g:Lf_PreviewResult = {'Function':0, 'BufTag':0}
+let g:Lf_UseVersionControlTool = 0  "  if uses gitignore file to ignore index
+
+" ====> Vim-Gutentags Settings
+set tags=./.tags;
+let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project']
+let g:gutentags_ctags_tagfile = '.tags'
+let s:vim_tags = expand('~/.vim/cache/tags')  " Define where the tag files being saved
+let g:gutentags_cache_dir = s:vim_tags
+" Create tag cache dir if not exists
+if !isdirectory(s:vim_tags)
+   silent! call mkdir(s:vim_tags, 'p')
+endif
+
 
 " ====> AutoPairs Settings
 let g:AutoPairsShortcutToggle = ''
 let g:AutoPairsShortcutFastWrap = ''
 let g:AutoPairsShortcutJump = ''
 let g:AutoPairsShortcutBackInsert = ''
+
+
+" deoplete Settings
+let g:deoplete#enable_at_startup = 1
+call deoplete#custom#option({
+            \'ignore_sources': {
+		\ '_': ['tag', 'buffer']
+		\},
+            \'ignore_case': v:true,
+            \'smart_case': v:true,
+            \'auto_complete_delay': 0,
+        \})
+function g:Multiple_cursors_before()
+    call deoplete#custom#buffer_option('auto_complete', v:false)
+endfunction
+function g:Multiple_cursors_after()
+    call deoplete#custom#buffer_option('auto_complete', v:true)
+endfunction
+
+" deoplete-jedi Settings
+let g:deoplete#sources#jedi#show_docstring = 1
+let g:deoplete#sources#jedi#enable_typeinfo = 1
