@@ -8,7 +8,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'vim-airline/vim-airline'
 Plug 'davidhalter/jedi-vim', { 'for': 'python' }
-if has('nvim')
+if has('nvim') 
     Plug 'Shougo/deoplete.nvim', { 
                 \'do': ':UpdateRemotePlugins',
                 \} 
@@ -21,10 +21,12 @@ Plug 'w0rp/ale', { 'for': 'python' }
 Plug 'mhinz/vim-signify'
 Plug 'jiangmiao/auto-pairs'
 Plug 'Yggdroot/indentLine'
- Plug 'junegunn/fzf.vim'
+Plug 'junegunn/fzf.vim'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 Plug 'ludovicchabant/vim-gutentags'
+Plug 'qpkorr/vim-bufkill'
+Plug 'christoomey/vim-tmux-navigator'
 
 " Themes
 " Plug 'jdkanani/vim-material-theme'
@@ -146,6 +148,19 @@ map <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
+
+" Quick escaping
+inoremap jk <Esc>
+inoremap kj <Esc>
+cnoremap jk <Esc>
+cnoremap kj <Esc>
+
+" Move between buffers
+noremap <c-h> gt
+noremap <c-l> gT
+
+" Quickly switch back to normal mode in terminal mode
+tnoremap <Esc> <C-\><C-n>
 
 " highlight all occurances
 vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
