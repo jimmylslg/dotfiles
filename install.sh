@@ -12,6 +12,7 @@
 #   4: Tmux is a plus
 #   5: Install latest Universal Ctags
 #        Link: https://github.com/universal-ctags/ctags
+#   6: zsh needs to be installed
 #
 #   #   #   #   #   #   #   #   #   #   #   #   #   #   
 
