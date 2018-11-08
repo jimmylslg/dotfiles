@@ -54,6 +54,12 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/mas
 export ZSH_CUSTOM=$HOME/.oh-my-zsh/custom
 export SHELL=/bin/zsh
 
+# Install custom themes
+curl -l https://raw.githubusercontent.com/AmrMKayid/KayidmacOS/master/kayid.zsh-theme -o \
+    $ZSH_CUSTOM/themes/kayid.zsh-theme
+curl -l https://raw.githubusercontent.com/dannynimmo/punctual-zsh-theme/master/punctual.zsh-theme -o \
+    $ZSH_CUSTOM/themes/punctual.zsh-theme
+
 # Install Vim Plug 
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
