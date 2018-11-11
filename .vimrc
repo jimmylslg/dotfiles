@@ -23,7 +23,6 @@ Plug 'w0rp/ale', { 'for': 'python' }
 Plug 'mhinz/vim-signify'
 Plug 'jiangmiao/auto-pairs'
 Plug 'Yggdroot/indentLine'
-Plug 'junegunn/fzf.vim'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 Plug 'ludovicchabant/vim-gutentags'
@@ -274,8 +273,9 @@ let g:ale_lint_on_text_changed = 'normal'
 " ====> Airline Settings
 let g:airline_theme='luna'
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#tab_nr_type = 1 
 let g:airline#extensions#ale#enabled = 1
-let g:rirline#extensions#tmuxline#enabled = 1
+let g:airline#extensions#tmuxline#enabled = 1
 let airline#extensions#tmuxline#snapshot_file = "~/.tmux-status.conf"
 let g:tmuxline_preset = {
       \'a'    : '#S',
