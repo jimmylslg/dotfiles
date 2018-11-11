@@ -7,6 +7,8 @@ call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'edkolev/tmuxline.vim'
 Plug 'davidhalter/jedi-vim', { 'for': 'python' }
 if has('nvim') 
     Plug 'Shougo/deoplete.nvim', { 
@@ -155,9 +157,11 @@ inoremap kj <Esc>
 cnoremap jk <Esc>
 cnoremap kj <Esc>
 
-" Move between buffers
-noremap <c-h> gt
-noremap <c-l> gT
+" Tags/buffers Mgmt/Navigation
+nnoremap <M-h> :tabp<cr>
+nnoremap <M-l> :tabn<cr>
+nnoremap <M-n> :tabe<cr>
+nnoremap <M-w> :bd<cr>
 
 " Quickly switch back to normal mode in terminal mode
 tnoremap <Esc> <C-\><C-n>
@@ -177,6 +181,9 @@ set backspace=indent,eol,start
 
 " Always show the status line
 set laststatus=2
+
+" Cmd line height
+set cmdheight=1
 
 " Remember cursor position between vim sessions
 autocmd BufReadPost *
@@ -263,7 +270,20 @@ let g:ale_sign_column_always = 1
 let g:ale_echo_msg_format = '[%linter%] %code: %%s'
 let g:ale_lint_on_insert_leave = 1
 let g:ale_lint_on_text_changed = 'normal'
+
+" ====> Airline Settings
+let g:airline_theme='luna'
+let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#ale#enabled = 1
+let g:rirline#extensions#tmuxline#enabled = 1
+let airline#extensions#tmuxline#snapshot_file = "~/.tmux-status.conf"
+let g:tmuxline_preset = {
+      \'a'    : '#S',
+      \'c'    : ['#(whoami)', '#(hostname)', '#(uptime | cut -d " " -f 1,2,3)'],
+      \'win'  : ['#I', '#W'],
+      \'cwin' : ['#I', '#W', '#F'],
+      \'y'    : ['%R', '%a','%m/%d/%Y'],
+      \'z'    : '#H'}
 
 " ====> Gitgutter Settings
 let g:gitgutter_map_keys = 0  " To disable all key mappings:
@@ -290,7 +310,6 @@ noremap <F9> :call asyncrun#quickfix_toggle(8)<cr>
 let g:Lf_ShortcutF = '<C-P>'
 let g:Lf_RootMarkers = ['.project', '.root', '.svn', '.git']
 let g:Lf_CacheDirectory = expand('~/.vim/cache')
-let g:Lf_ShortcutB = '<m-n>'
 noremap <a-r> :LeaderfMru<cr>
 noremap <a-f> :LeaderfFunction!<cr>
 noremap <a-b> :LeaderfBuffer<cr>
