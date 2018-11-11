@@ -205,11 +205,13 @@ autocmd bufenter * if (winnr('$') == 1 && &buftype ==# 'quickfix' ) |
 
 " ====> NerdTree Settings
 map <C-t> :NERDTreeToggle<CR>
-let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
+let NERDTreeIgnore=['\.pyc$', '\~$', '__pycache__'] "ignore files in NERDTree
+let g:NERDTreeWinSize=25
+let NERDTreeMinimalUI=1
 
 " ====> Ctrlp Settings
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/](\.git|env|\.hg|CVS|\.svn)$',
+  \ 'dir':  '\v[\/](\.git|env|\.hg|CVS|\.svn|__pycache__)$',
   \ 'file': '\v\.(a|class|db|dll|DS_Store|dylib|exe|idb|lib|ncb|o|obj|pdb|psd|pyc|pyo|sdf|so|sublime-workspace|suo|swp|zip)$',
   \ }
 
