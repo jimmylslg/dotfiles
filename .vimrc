@@ -205,7 +205,7 @@ autocmd bufenter * if (winnr('$') == 1 && &buftype ==# 'quickfix' ) |
 
 " ====> NerdTree Settings
 map <C-t> :NERDTreeToggle<CR>
-let NERDTreeIgnore=['\.pyc$', '\~$', '__pycache__'] "ignore files in NERDTree
+let NERDTreeIgnore=['\.pyc$', '\~$', '__pycache__$[[dir]]', 'env$[[dir]]'] "ignore files in NERDTree
 let g:NERDTreeWinSize=25
 let NERDTreeMinimalUI=1
 
