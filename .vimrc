@@ -26,8 +26,10 @@ Plug 'Yggdroot/indentLine'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 Plug 'ludovicchabant/vim-gutentags'
-Plug 'qpkorr/vim-bufkill'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
+Plug 'majutsushi/tagbar'
+Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins', 'for': 'python'}
 
 " Themes
 " Plug 'jdkanani/vim-material-theme'
@@ -96,6 +98,8 @@ set diffopt+=vertical
 " enable mouse click
 set mouse=a
 
+set nopaste
+
 " Set to auto read when a file is changed from the outside
 set autoread
 
@@ -121,6 +125,9 @@ set ai ic incsearch sm si
 " Highlight search results
 set hlsearch
 
+" A buffer becomes hidden when it is abandoned
+set hid
+
 " Show matching brackets when text indicator is over them
 set showmatch
 " How many tenths of a second to blink when matching brackets
@@ -128,6 +135,7 @@ set mat=2
 
 " display line number
 set number relativenumber
+set numberwidth=1
 
 " Add a bit extra margin to the left
 set foldcolumn=1
@@ -155,18 +163,33 @@ inoremap jk <Esc>
 inoremap kj <Esc>
 cnoremap jk <Esc>
 cnoremap kj <Esc>
+noremap H ^
+noremap L g_
+noremap J 5j
+noremap K 5k
+
+" No need for ex mode
+nnoremap Q <nop>
+" recording macros is not my thing
+map q <Nop>
 
 " Tags/buffers Mgmt/Navigation
-nnoremap <M-h> :tabp<cr>
-nnoremap <M-l> :tabn<cr>
-nnoremap <M-n> :tabe<cr>
-nnoremap <M-w> :bd<cr>
+nnoremap <M-h> :bp<cr>
+nnoremap <M-l> :bn<cr>
+nnoremap <M-n> :enew<cr>
+" nnoremap <M-w> :bd<cr>
+nnoremap <M-w> :Sayonara!<cr>
 
+" Nvim terminal -------------------------------------------------------------{{{
 " Quickly switch back to normal mode in terminal mode
 tnoremap <Esc> <C-\><C-n>
+"au BufEnter * if &buftype == 'terminal' | :startinsert | endif
+"autocmd BufEnter term://* startinsert
+autocmd TermOpen * set bufhidden=hide  " Don't hide terminal when switching buffer
 
 " highlight all occurances
-vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
+vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
+vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 
 "to indent selected text by pressing tab key
 vmap <tab> >gv
@@ -180,6 +203,9 @@ set backspace=indent,eol,start
 
 " Always show the status line
 set laststatus=2
+
+" Don't redraw while executing macros (good performance config)
+set lazyredraw 
 
 " Cmd line height
 set cmdheight=1
@@ -198,6 +224,13 @@ autocmd bufwinenter quickfix nnoremap <silent> <buffer>
 autocmd bufenter * if (winnr('$') == 1 && &buftype ==# 'quickfix' ) |
                 \   bd|
                 \   q | endif
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Fast editing and reloading of vimrc configs
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <leader>e :e! ~/.vimrc<cr>
+autocmd! bufwritepost ~/.vimrc source ~/.config/nvim/init.vim | echo "reloaded"
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => plugins settings
@@ -276,6 +309,38 @@ let g:ale_lint_on_text_changed = 'normal'
 let g:airline_theme='luna'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#tab_nr_type = 1 
+let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline#extensions#tabline#buffer_idx_mode = 1
+tmap <leader>1  <C-\><C-n><Plug>AirlineSelectTab1
+tmap <leader>2  <C-\><C-n><Plug>AirlineSelectTab2
+tmap <leader>3  <C-\><C-n><Plug>AirlineSelectTab3
+tmap <leader>4  <C-\><C-n><Plug>AirlineSelectTab4
+tmap <leader>5  <C-\><C-n><Plug>AirlineSelectTab5
+tmap <leader>6  <C-\><C-n><Plug>AirlineSelectTab6
+tmap <leader>7  <C-\><C-n><Plug>AirlineSelectTab7
+tmap <leader>8  <C-\><C-n><Plug>AirlineSelectTab8
+tmap <leader>9  <C-\><C-n><Plug>AirlineSelectTab9
+nmap <leader>1 <Plug>AirlineSelectTab1
+nmap <leader>2 <Plug>AirlineSelectTab2
+nmap <leader>3 <Plug>AirlineSelectTab3
+nmap <leader>4 <Plug>AirlineSelectTab4
+nmap <leader>5 <Plug>AirlineSelectTab5
+nmap <leader>6 <Plug>AirlineSelectTab6
+nmap <leader>7 <Plug>AirlineSelectTab7
+nmap <leader>8 <Plug>AirlineSelectTab8
+nmap <leader>9 <Plug>AirlineSelectTab9
+let g:airline#extensions#tabline#buffer_idx_format = {
+        \ '0': '0 ',
+        \ '1': '1 ',
+        \ '2': '2 ',
+        \ '3': '3 ',
+        \ '4': '4 ',
+        \ '5': '5 ',
+        \ '6': '6 ',
+        \ '7': '7 ',
+        \ '8': '8 ',
+        \ '9': '9 ',
+        \}
 let g:airline#extensions#ale#enabled = 1
 let g:airline#extensions#tmuxline#enabled = 1
 let airline#extensions#tmuxline#snapshot_file = "~/.tmux-status.conf"
@@ -286,6 +351,7 @@ let g:tmuxline_preset = {
       \'cwin' : ['#I', '#W', '#F'],
       \'y'    : ['%R', '%a','%m/%d/%Y'],
       \'z'    : '#H'}
+let g:airline#extensions#tagbar#enabled = 0
 
 " ====> Gitgutter Settings
 let g:gitgutter_map_keys = 0  " To disable all key mappings:
@@ -354,12 +420,12 @@ call deoplete#custom#option({
             \'smart_case': v:true,
             \'auto_complete_delay': 0,
         \})
-function g:Multiple_cursors_before()
-    call deoplete#custom#buffer_option('auto_complete', v:false)
-endfunction
-function g:Multiple_cursors_after()
-    call deoplete#custom#buffer_option('auto_complete', v:true)
-endfunction
+" function g:Multiple_cursors_before()
+"     call deoplete#custom#buffer_option('auto_complete', v:false)
+" endfunction
+" function g:Multiple_cursors_after()
+"     call deoplete#custom#buffer_option('auto_complete', v:true)
+" endfunction
 
 " deoplete-jedi Settings
 let g:deoplete#sources#jedi#show_docstring = 1
