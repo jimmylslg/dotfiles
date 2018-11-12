@@ -4,7 +4,7 @@
 call plug#begin('~/.vim/plugged')
 
 " Plugins
-Plug 'tpope/vim-fugitive'
+" Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -22,14 +22,15 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'w0rp/ale', { 'for': 'python' }
 Plug 'mhinz/vim-signify'
 Plug 'jiangmiao/auto-pairs'
-Plug 'Yggdroot/indentLine'
+Plug 'Yggdroot/indentLine', { 'for': 'python' }
 Plug 'skywind3000/asyncrun.vim'
 Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
-Plug 'majutsushi/tagbar'
+Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
 Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins', 'for': 'python'}
+
 
 " Themes
 " Plug 'jdkanani/vim-material-theme'
@@ -430,3 +431,7 @@ call deoplete#custom#option({
 " deoplete-jedi Settings
 let g:deoplete#sources#jedi#show_docstring = 1
 let g:deoplete#sources#jedi#enable_typeinfo = 1
+
+" Semshi Settings
+let g:semshi#active = v:true
+let g:semshi#error_sign = v:false
