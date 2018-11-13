@@ -31,7 +31,6 @@ Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
 Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
 Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins', 'for': 'python'}
 
-
 " Themes
 " Plug 'jdkanani/vim-material-theme'
 " Plug 'kaicataldo/material.vim'
@@ -286,7 +285,17 @@ let g:jedi#force_py_version=3
 " let g:pymode_syntax = 1
 " let g:pymode_syntax_all = 1
 " let g:pymode_trim_whitespaces = 1 "Trim unused white spaces on save
-
+" let g:pymode_python = 'python3'
+" let g:pymode_lint = 0  " ALE
+" let g:pymode_folding = 0  " SimplyFold
+" let g:pymode_run = 0
+" let g:pymode_breakpoint = 0
+" let g:pymode_options = 0
+" let g:pymode_doc = 0
+" let g:pymode_rope = 0
+" let g:pymode_debug = 0
+" let g:pymode_syntax = 1
+" let g:pymode_syntax_all = 1
 
 " ====> Ale Settings
 " let g:ale_python_flake8_executable = 'flake8'
@@ -435,3 +444,7 @@ let g:deoplete#sources#jedi#enable_typeinfo = 1
 " Semshi Settings
 let g:semshi#active = v:true
 let g:semshi#error_sign = v:false
+
+" Tagbar Settings
+nmap <F8> :TagbarToggle<CR>
+let g:tagbar_sort = 0
