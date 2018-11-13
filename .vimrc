@@ -231,6 +231,10 @@ autocmd bufenter * if (winnr('$') == 1 && &buftype ==# 'quickfix' ) |
 map <leader>e :e! ~/.vimrc<cr>
 autocmd! bufwritepost ~/.vimrc source ~/.config/nvim/init.vim | echo "reloaded"
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Function Helpers
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+com! FormatJSON %!python -m json.tool
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => plugins settings
