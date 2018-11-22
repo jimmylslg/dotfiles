@@ -19,7 +19,7 @@ endif
 Plug 'ervandew/supertab'
 Plug 'tpope/vim-surround'
 Plug 'terryma/vim-multiple-cursors'
-Plug 'w0rp/ale', { 'for': 'python' }
+Plug 'w0rp/ale', { 'for': ['python', 'yaml', 'dockerfile'] }
 Plug 'mhinz/vim-signify'
 Plug 'jiangmiao/auto-pairs'
 Plug 'Yggdroot/indentLine', { 'for': 'python' }
@@ -29,7 +29,7 @@ Plug 'ludovicchabant/vim-gutentags'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
 Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
-Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins', 'for': 'python'}
+" Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins', 'for': 'python'}
 
 " Themes
 " Plug 'jdkanani/vim-material-theme'
@@ -306,9 +306,14 @@ let g:jedi#force_py_version=3
 let g:ale_completion_enabled = 0
 let g:ale_linters_explicit = 1
 let g:ale_fix_on_save = 1
-let g:ale_fixers = {'python': ['autopep8']}
+let g:ale_fixers = {
+        \'python': ['autopep8'],
+    \}
 let g:ale_lint_on_enter = 0
-let g:ale_linters = {'python': ['flake8', 'pylint']}
+let g:ale_linters = {
+        \'python': ['flake8', 'pylint'],
+        \'yaml': ['yamllint']
+    \}
 let g:ale_python_flake8_options='--ignore=E501 --max-line-length=120'
 let g:ale_python_pylint_options='--max-line-length=120'
 let g:ale_python_autopep8_options='--max-line-length=120'

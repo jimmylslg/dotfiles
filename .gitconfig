@@ -13,3 +13,6 @@
   added = yellow
   changed = green
   untracked = cyan
+[user]
+	email = jimmpan@cisco.com
+	name = Jimmy Pan
