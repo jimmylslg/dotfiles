@@ -19,10 +19,10 @@ endif
 Plug 'ervandew/supertab'
 Plug 'tpope/vim-surround'
 Plug 'terryma/vim-multiple-cursors'
-Plug 'w0rp/ale', { 'for': ['python', 'yaml', 'dockerfile'] }
+Plug 'w0rp/ale', { 'for': ['python', 'yaml'] }
 Plug 'mhinz/vim-signify'
 Plug 'jiangmiao/auto-pairs'
-Plug 'Yggdroot/indentLine', { 'for': 'python' }
+Plug 'Yggdroot/indentLine', { 'for': ['python', 'yaml'] }
 Plug 'skywind3000/asyncrun.vim'
 Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 Plug 'ludovicchabant/vim-gutentags'
@@ -52,6 +52,9 @@ set noswapfile
 " Enable filetype plugins
 filetype plugin on
 filetype indent on
+
+" Set correct tabspace for yaml type file
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
 " Sets how many lines of history VIM has to remember
 set history=5000
