@@ -5,7 +5,7 @@ call plug#begin('~/.vim/plugged')
 
 " Plugins
 Plug 'tpope/vim-fugitive'
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+" Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'edkolev/tmuxline.vim'
@@ -29,7 +29,8 @@ Plug 'ludovicchabant/vim-gutentags'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
 Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
-" Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins', 'for': 'python'}
+Plug 'kassio/neoterm'
+Plug 'tpope/vim-eunuch'
 
 " Themes
 " Plug 'jdkanani/vim-material-theme'
@@ -460,3 +461,9 @@ let g:semshi#error_sign = v:false
 " Tagbar Settings
 nmap <F8> :TagbarToggle<CR>
 let g:tagbar_sort = 0
+
+" Neoterm Settings
+let g:neoterm_default_mod='vertical'
+nmap gx <Plug>(neoterm-repl-send)
+xmap gx <Plug>(neoterm-repl-send)
+nmap gxx <Plug>(neoterm-repl-send-line)
