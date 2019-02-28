@@ -31,6 +31,7 @@ Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
 Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
 Plug 'kassio/neoterm'
 Plug 'tpope/vim-eunuch'
+Plug 'jeetsukumaran/vim-pythonsense', { 'for': 'python' }
 
 " Themes
 " Plug 'jdkanani/vim-material-theme'
