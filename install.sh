@@ -8,7 +8,7 @@
 #   2: virtualenv with Ptyhon3 should be created under
 #       $HOME/.config/nvim/neovim_env
 #   3: Pip3 in $PATH should installs Autopep8, flake8, yamllint
-#       pylint in case needed
+#       pylint, ansible-lint in case needed
 #   4: Tmux is a plus
 #   5: Install latest Universal Ctags
 #        Link: https://github.com/universal-ctags/ctags

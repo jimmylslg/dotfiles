@@ -32,6 +32,7 @@ Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
 Plug 'kassio/neoterm'
 Plug 'tpope/vim-eunuch'
 Plug 'jeetsukumaran/vim-pythonsense', { 'for': 'python' }
+Plug 'pearofducks/ansible-vim', { 'do': 'cd ./UltiSnips; ./generate.py' }
 
 " Themes
 " Plug 'jdkanani/vim-material-theme'
@@ -317,7 +318,8 @@ let g:ale_fixers = {
 let g:ale_lint_on_enter = 0
 let g:ale_linters = {
         \'python': ['flake8', 'pylint'],
-        \'yaml': ['yamllint']
+        \'yaml': ['yamllint'],
+        \'ansible': ['ansible-lint']
     \}
 let g:ale_python_flake8_options='--ignore=E501 --max-line-length=120'
 let g:ale_python_pylint_options='--max-line-length=120'
