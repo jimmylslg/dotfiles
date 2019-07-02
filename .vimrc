@@ -18,6 +18,7 @@ if has('nvim')
 endif
 Plug 'ervandew/supertab'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'w0rp/ale', { 'for': ['python', 'yaml'] }
 Plug 'mhinz/vim-signify'
@@ -38,7 +39,8 @@ Plug 'pearofducks/ansible-vim', { 'do': 'cd ./UltiSnips; ./generate.py' }
 " Plug 'jdkanani/vim-material-theme'
 " Plug 'kaicataldo/material.vim'
 " Plug 'kristijanhusak/vim-hybrid-material'
-Plug 'liuchengxu/space-vim-dark' 
+" Plug 'liuchengxu/space-vim-dark' 
+Plug 'dracula/vim', { 'as': 'dracula' }
 
 " Initialize plugin system
 call plug#end()
@@ -84,7 +86,8 @@ syntax on
 let g:material_theme_style = 'dark'
 set background=dark
 " colorscheme material
-colorscheme space-vim-dark
+" colorscheme space-vim-dark
+colorscheme dracula
 hi Comment cterm=italic
 
 " Spell Color related
@@ -247,10 +250,10 @@ com! FormatJSON %!python -m json.tool
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " ====> NerdTree Settings
-map <C-t> :NERDTreeToggle<CR>
-let NERDTreeIgnore=['\.pyc$', '\~$', '__pycache__$[[dir]]', 'env$[[dir]]'] "ignore files in NERDTree
-let g:NERDTreeWinSize=25
-let NERDTreeMinimalUI=1
+" map <C-t> :NERDTreeToggle<CR>
+" let NERDTreeIgnore=['\.pyc$', '\~$', '__pycache__$[[dir]]', 'env$[[dir]]'] "ignore files in NERDTree
+" let g:NERDTreeWinSize=25
+" let NERDTreeMinimalUI=1
 
 " ====> Ctrlp Settings
 let g:ctrlp_custom_ignore = {
@@ -273,7 +276,7 @@ let g:jedi#goto_assignments_command = "<leader>g"
 let g:jedi#goto_command = "<leader>d"
 let g:jedi#rename_command = "<leader>r"
 let g:jedi#usages_command = "<leader>n"
-let g:jedi#use_tabs_not_buffers = 1  " Open in newtab instead
+let g:jedi#use_tabs_not_buffers = 0  " Open in buffer instead
 let g:jedi#force_py_version=3
 
 " ====> Python-mode Settings
@@ -434,6 +437,7 @@ let g:AutoPairsShortcutToggle = ''
 let g:AutoPairsShortcutFastWrap = ''
 let g:AutoPairsShortcutJump = ''
 let g:AutoPairsShortcutBackInsert = ''
+
 
 
 " deoplete Settings
