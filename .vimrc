@@ -34,6 +34,7 @@ Plug 'kassio/neoterm'
 Plug 'tpope/vim-eunuch'
 Plug 'jeetsukumaran/vim-pythonsense', { 'for': 'python' }
 Plug 'pearofducks/ansible-vim', { 'do': 'cd ./UltiSnips; ./generate.py' }
+Plug 'easymotion/vim-easymotion'
 
 " Themes
 " Plug 'jdkanani/vim-material-theme'
@@ -474,3 +475,12 @@ let g:neoterm_default_mod='vertical'
 nmap gx <Plug>(neoterm-repl-send)
 xmap gx <Plug>(neoterm-repl-send)
 nmap gxx <Plug>(neoterm-repl-send-line)
+
+" easymotion Settings
+" <Leader>f{char} to move to {char}
+map  <Leader>f <Plug>(easymotion-bd-f)
+nmap <Leader>f <Plug>(easymotion-overwin-f)
+
+" Move to word
+map  <Leader>w <Plug>(easymotion-bd-w)
+nmap <Leader>w <Plug>(easymotion-overwin-w)
