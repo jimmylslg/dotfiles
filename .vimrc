@@ -476,11 +476,9 @@ nmap gx <Plug>(neoterm-repl-send)
 xmap gx <Plug>(neoterm-repl-send)
 nmap gxx <Plug>(neoterm-repl-send-line)
 
-" easymotion Settings
-" <Leader>f{char} to move to {char}
-map  <Leader>f <Plug>(easymotion-bd-f)
-nmap <Leader>f <Plug>(easymotion-overwin-f)
-
-" Move to word
-map  <Leader>w <Plug>(easymotion-bd-w)
+" ====> easymotion Settings
+let g:EasyMotion_do_mapping = 0
+nmap <Leader>f <Plug>(easymotion-overwin-f2)
 nmap <Leader>w <Plug>(easymotion-overwin-w)
+let g:EasyMotion_smartcase = 1
+let g:EasyMotion_use_smartsign_us = 1
