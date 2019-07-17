@@ -419,7 +419,8 @@ let g:Lf_WildIgnore = {
             \}
 let g:Lf_HideHelp = 1
 let g:Lf_PreviewResult = {'Function':0, 'BufTag':0}
-let g:Lf_UseVersionControlTool = 0  "  if uses gitignore file to ignore index
+let g:Lf_DefaultExternalTool = ""
+let g:Lf_UseVersionControlTool=0  "  if uses gitignore file to ignore index
 
 " ====> Vim-Gutentags Settings
 set tags=./.tags;
