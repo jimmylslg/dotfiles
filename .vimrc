@@ -35,6 +35,7 @@ Plug 'tpope/vim-eunuch'
 Plug 'jeetsukumaran/vim-pythonsense', { 'for': 'python' }
 Plug 'pearofducks/ansible-vim', { 'do': 'cd ./UltiSnips; ./generate.py' }
 Plug 'easymotion/vim-easymotion'
+Plug 'jpalardy/vim-slime'
 
 " Themes
 " Plug 'jdkanani/vim-material-theme'
@@ -483,3 +484,8 @@ nmap <Leader>f <Plug>(easymotion-overwin-f2)
 nmap <Leader>w <Plug>(easymotion-overwin-w)
 let g:EasyMotion_smartcase = 1
 let g:EasyMotion_use_smartsign_us = 1
+
+" ====> vim-slime Settings
+let g:slime_target = "tmux"
+let g:slime_default_config = {"socket_name": get(split($TMUX, ","), 0), "target_pane": "{bottom}"}
+let g:slime_dont_ask_default = 1
