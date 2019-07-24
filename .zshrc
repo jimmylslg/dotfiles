@@ -110,6 +110,7 @@ alias n=nvim
 if type nvim > /dev/null 2>&1; then
   alias vim='nvim'
 fi
+alias e=nvim
 alias editvim='vim ~/.vimrc'
 alias editzsh='vim ~/.zshrc'
 alias edittmux='vim ~/.tmux.conf'
@@ -130,6 +131,7 @@ alias activate='source ./env/bin/activate'
 alias snow_hosts='/Users/jimmpan/devenv/esp_cli/env/bin/python -m esp_cli.snow_hosts --config=/Users/jimmpan/devenv/__no__/snow_jimmy.yaml'
 alias iaca='cd ~/devenv/GIS-IAC/api_router && ll &&activate'
 alias iacp='cd ~/devenv/GIS-IAC/iac-ansible && ll &&activate'
+
 
 
 # autojump
