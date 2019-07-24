@@ -487,5 +487,9 @@ let g:EasyMotion_use_smartsign_us = 1
 
 " ====> vim-slime Settings
 let g:slime_target = "tmux"
-let g:slime_default_config = {"socket_name": get(split($TMUX, ","), 0), "target_pane": "{bottom}"}
+let g:slime_default_config = {"socket_name": get(split($TMUX, ","), 0), "target_pane": "{right}"}
 let g:slime_dont_ask_default = 1
+let g:slime_no_mappings = 1
+nmap <c-c><c-c> <ESC>:1,$SlimeSend<CR>  " Send entire file
+xmap <c-c><c-c> <Plug>SlimeRegionSend
+nmap <c-c>v     <Plug>SlimeConfig
