@@ -111,7 +111,7 @@ if type nvim > /dev/null 2>&1; then
   alias vim='nvim'
 fi
 alias e=nvim
-alias ip=ipython
+alias ipy="python -c 'import IPython; IPython.terminal.ipapp.launch_new_instance()'"
 alias editvim='vim ~/.vimrc'
 alias editzsh='vim ~/.zshrc'
 alias edittmux='vim ~/.tmux.conf'

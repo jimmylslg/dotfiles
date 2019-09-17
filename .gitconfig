@@ -16,3 +16,5 @@
 [user]
 	email = jimmpan@cisco.com
 	name = Jimmy Pan
+[core]
+	editor = nvim
