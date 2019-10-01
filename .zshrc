@@ -10,6 +10,11 @@ export SHELL=/bin/zsh
 # load ~/.zshrc.local if exists
 [[ -s $HOME/.zshrc.local ]] && source "$HOME/.zshrc.local"
 
+# Returns whether the given command is executable or aliased.
+_has() {
+  return $( whence $1 >/dev/null )
+}
+
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -75,6 +80,9 @@ plugins=(
   zsh-syntax-highlighting
   zsh-autosuggestions
   autojump
+  tmux
+  copydir
+  django
 )
 ZSH_DISABLE_COMPFIX="true"
 source $ZSH/oh-my-zsh.sh
@@ -132,7 +140,31 @@ alias activate='source ./env/bin/activate'
 alias snow_hosts='/Users/jimmpan/devenv/esp_cli/env/bin/python -m esp_cli.snow_hosts --config=/Users/jimmpan/devenv/__no__/snow_jimmy.yaml'
 alias iaca='cd ~/devenv/GIS-IAC/api_router && ll &&activate'
 alias iacp='cd ~/devenv/GIS-IAC/iac-ansible && ll &&activate'
+alias es='nvim $(fzf)'
+alias gco='git checkout $(git branch |fzf)'
 
+
+# The Silver Searcher is even faster than Ack.
+# https://github.com/ggreer/the_silver_searcher
+if _has ag; then
+  alias ag='ag --color-path 1\;31 --color-match 1\;32 --color -U --path-to-ignore ~/.ignore'
+fi
+
+#FZF
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# fzf + ag configuration
+if _has fzf && _has ag; then
+  export FZF_DEFAULT_COMMAND='ag -U --nocolor --path-to-ignore ~/.ignore -g ""'
+  export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+  export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND"
+  export FZF_DEFAULT_OPTS='
+  --height 40%
+  --layout=reverse
+  --border
+  --color fg:242,bg:236,hl:65,fg+:15,bg+:239,hl+:108
+  --color info:108,prompt:109,spinner:108,pointer:168,marker:168
+  '
+fi
 
 
 # autojump
@@ -146,3 +178,4 @@ for dump in ~/.zcompdump(N.mh+24); do
   compinit
 done
 compinit -C
+

@@ -25,7 +25,7 @@ Plug 'mhinz/vim-signify'
 Plug 'jiangmiao/auto-pairs'
 Plug 'Yggdroot/indentLine', { 'for': ['python', 'yaml'] }
 " Plug 'skywind3000/asyncrun.vim'
-Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
+" Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
@@ -36,6 +36,12 @@ Plug 'jeetsukumaran/vim-pythonsense', { 'for': 'python' }
 Plug 'pearofducks/ansible-vim', { 'do': 'cd ./UltiSnips; ./generate.py' }
 Plug 'easymotion/vim-easymotion'
 Plug 'jpalardy/vim-slime'
+
+" PlugInstall and PlugUpdate will clone fzf in ~/.fzf and run the install script
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+  " Both options are optional. You don't have to install fzf in ~/.fzf
+  " and you don't have to run the install script if you use fzf only in Vim.
+Plug 'junegunn/fzf.vim'
 
 " Themes
 " Plug 'jdkanani/vim-material-theme'
@@ -406,22 +412,22 @@ let g:asyncrun_bell = 1
 noremap <F9> :call asyncrun#quickfix_toggle(8)<cr> 
 
 " ====> LeaderF Settings
-let g:Lf_ShortcutF = '<C-P>'
-let g:Lf_RootMarkers = ['.project', '.root', '.svn', '.git']
-let g:Lf_CacheDirectory = expand('~/.vim/cache')
-noremap <a-r> :LeaderfMru<cr>
-noremap <a-f> :LeaderfFunction!<cr>
-noremap <a-b> :LeaderfBuffer<cr>
-noremap <a-t> :LeaderfTag<cr>
-let g:Lf_WorkingDirectoryMode = 'Ac'
-let g:Lf_WildIgnore = {
-            \ 'dir': ['.svn','.git','.hg', 'env'],
-            \ 'file': ['*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]']
-            \}
-let g:Lf_HideHelp = 1
-let g:Lf_PreviewResult = {'Function':0, 'BufTag':0}
-let g:Lf_DefaultExternalTool = ""
-let g:Lf_UseVersionControlTool=0  "  if uses gitignore file to ignore index
+" let g:Lf_ShortcutF = '<C-P>'
+" let g:Lf_RootMarkers = ['.project', '.root', '.svn', '.git']
+" let g:Lf_CacheDirectory = expand('~/.vim/cache')
+" noremap <a-r> :LeaderfMru<cr>
+" noremap <a-f> :LeaderfFunction!<cr>
+" noremap <a-b> :LeaderfBuffer<cr>
+" noremap <a-t> :LeaderfTag<cr>
+" let g:Lf_WorkingDirectoryMode = 'Ac'
+" let g:Lf_WildIgnore = {
+"             \ 'dir': ['.svn','.git','.hg', 'env'],
+"             \ 'file': ['*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]']
+"             \}
+" let g:Lf_HideHelp = 1
+" let g:Lf_PreviewResult = {'Function':0, 'BufTag':0}
+" let g:Lf_DefaultExternalTool = ""
+" let g:Lf_UseVersionControlTool=0  "  if uses gitignore file to ignore index
 
 " ====> Vim-Gutentags Settings
 set tags=./.tags;
@@ -464,9 +470,6 @@ call deoplete#custom#option({
 let g:deoplete#sources#jedi#show_docstring = 1
 let g:deoplete#sources#jedi#enable_typeinfo = 1
 
-" Semshi Settings
-let g:semshi#active = v:true
-let g:semshi#error_sign = v:false
 
 " Tagbar Settings
 nmap <F8> :TagbarToggle<CR>
@@ -493,3 +496,17 @@ let g:slime_no_mappings = 1
 nmap <c-c><c-c> <ESC>:1,$SlimeSend<CR>  " Send entire file
 xmap <c-c><c-c> <Plug>SlimeRegionSend
 nmap <c-c>v     <Plug>SlimeConfig
+
+" ====> FZF-vim Settings
+nnoremap <C-p> :Files<Cr>
+nnoremap <a-t> :BTags<Cr>
+nnoremap <a-T> :Tags<Cr>
+nnoremap <a-f> :Ag<Cr>
+autocmd! FileType fzf tnoremap <buffer> <esc> <c-c>
+let g:fzf_action = {
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
+" [Buffers] Jump to the existing window if possible
+let g:fzf_buffers_jump = 1
+" [Tags] Command to generate tags file
+let g:fzf_tags_command = 'ctags -R'
