@@ -258,18 +258,6 @@ com! FormatJSON %!python -m json.tool
 " => plugins settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" ====> NerdTree Settings
-" map <C-t> :NERDTreeToggle<CR>
-" let NERDTreeIgnore=['\.pyc$', '\~$', '__pycache__$[[dir]]', 'env$[[dir]]'] "ignore files in NERDTree
-" let g:NERDTreeWinSize=25
-" let NERDTreeMinimalUI=1
-
-" ====> Ctrlp Settings
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/](\.git|env|\.hg|CVS|\.svn|__pycache__)$',
-  \ 'file': '\v\.(a|class|db|dll|DS_Store|dylib|exe|idb|lib|ncb|o|obj|pdb|psd|pyc|pyo|sdf|so|sublime-workspace|suo|swp|zip)$',
-  \ }
-
 " ====> Jedi-vim Settings
 " let g:jedi#force_py_version=3
 let g:jedi#auto_initialization = 1
@@ -288,36 +276,6 @@ let g:jedi#usages_command = "<leader>n"
 let g:jedi#use_tabs_not_buffers = 0  " Open in buffer instead
 let g:jedi#force_py_version=3
 
-" ====> Python-mode Settings
-" let g:pymode = 1
-" let g:pymode_breakpoint = 0
-" let g:pymode_virtualenv = 1
-" let g:pymode_lint = 1 " Code checking
-" let g:pymode_lint_cwindow = 1
-" let g:pymode_lint_ignore = ["E501",]
-" let g:pymode_lint_on_fly = 0 " on the fly code checking
-" let g:pymode_lint_on_write = 1
-" let g:pymode_lint_unmodified = 0
-" let g:pymode_options_max_line_length = 120
-" let g:pymode_python = 'python3'
-" let g:pymode_rope = 0
-" let g:pymode_rope_complete_on_dot = 0
-" let g:pymode_rope_completion = 0
-" let g:pymode_rope_lookup_project = 0
-" let g:pymode_syntax = 1
-" let g:pymode_syntax_all = 1
-" let g:pymode_trim_whitespaces = 1 "Trim unused white spaces on save
-" let g:pymode_python = 'python3'
-" let g:pymode_lint = 0  " ALE
-" let g:pymode_folding = 0  " SimplyFold
-" let g:pymode_run = 0
-" let g:pymode_breakpoint = 0
-" let g:pymode_options = 0
-" let g:pymode_doc = 0
-" let g:pymode_rope = 0
-" let g:pymode_debug = 0
-" let g:pymode_syntax = 1
-" let g:pymode_syntax_all = 1
 
 " ====> Ale Settings
 " let g:ale_python_flake8_executable = 'flake8'
@@ -412,23 +370,6 @@ let g:asyncrun_open = 8
 let g:asyncrun_bell = 1
 noremap <F9> :call asyncrun#quickfix_toggle(8)<cr> 
 
-" ====> LeaderF Settings
-" let g:Lf_ShortcutF = '<C-P>'
-" let g:Lf_RootMarkers = ['.project', '.root', '.svn', '.git']
-" let g:Lf_CacheDirectory = expand('~/.vim/cache')
-" noremap <a-r> :LeaderfMru<cr>
-" noremap <a-f> :LeaderfFunction!<cr>
-" noremap <a-b> :LeaderfBuffer<cr>
-" noremap <a-t> :LeaderfTag<cr>
-" let g:Lf_WorkingDirectoryMode = 'Ac'
-" let g:Lf_WildIgnore = {
-"             \ 'dir': ['.svn','.git','.hg', 'env'],
-"             \ 'file': ['*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]']
-"             \}
-" let g:Lf_HideHelp = 1
-" let g:Lf_PreviewResult = {'Function':0, 'BufTag':0}
-" let g:Lf_DefaultExternalTool = ""
-" let g:Lf_UseVersionControlTool=0  "  if uses gitignore file to ignore index
 
 " ====> Vim-Gutentags Settings
 set tags=./.tags;
@@ -447,8 +388,6 @@ let g:AutoPairsShortcutToggle = ''
 let g:AutoPairsShortcutFastWrap = ''
 let g:AutoPairsShortcutJump = ''
 let g:AutoPairsShortcutBackInsert = ''
-
-
 
 " deoplete Settings
 let g:deoplete#enable_at_startup = 1
