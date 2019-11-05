@@ -34,6 +34,7 @@ Plug 'pearofducks/ansible-vim', { 'do': 'cd ./UltiSnips; ./generate.py' }
 Plug 'easymotion/vim-easymotion'
 Plug 'jpalardy/vim-slime'
 Plug 'tpope/vim-commentary'
+Plug 'janko/vim-test'
 
 " PlugInstall and PlugUpdate will clone fzf in ~/.fzf and run the install script
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -478,3 +479,14 @@ function! OpenFloatingWin()
         \ norelativenumber
         \ signcolumn=no
 endfunction
+
+" ====> vim-test Settings
+let test#python#runner = 'djangotest'
+let test#strategy = "neovim"
+let g:test#preserve_screen = 1
+let test#neovim#term_position = "belowright"
+let test#strategy = {
+  \ 'nearest': 'neovim',
+  \ 'file':    'neoterm',
+  \ 'suite':   'neoterm',
+\}
