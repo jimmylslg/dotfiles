@@ -36,6 +36,8 @@ Plug 'jpalardy/vim-slime'
 Plug 'tpope/vim-commentary'
 Plug 'janko/vim-test'
 
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
 " PlugInstall and PlugUpdate will clone fzf in ~/.fzf and run the install script
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   " Both options are optional. You don't have to install fzf in ~/.fzf
@@ -95,6 +97,8 @@ set background=dark
 " colorscheme material
 " colorscheme space-vim-dark
 colorscheme dracula
+
+hi Normal guibg=NONE ctermbg=NONE
 hi Comment cterm=italic
 
 " Spell Color related
