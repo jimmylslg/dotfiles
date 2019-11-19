@@ -8,35 +8,33 @@ Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'edkolev/tmuxline.vim'
-Plug 'davidhalter/jedi-vim', { 'for': 'python' }
-if has('nvim') 
-    Plug 'Shougo/deoplete.nvim', { 
-                \'do': ':UpdateRemotePlugins',
-                \} 
-    Plug 'zchee/deoplete-jedi', { 'for': 'python' }
-endif
+" Plug 'davidhalter/jedi-vim', { 'for': 'python' }
+" if has('nvim') 
+"     Plug 'Shougo/deoplete.nvim', { 
+"                 \'do': ':UpdateRemotePlugins',
+"                 \} 
+"     Plug 'zchee/deoplete-jedi', { 'for': 'python' }
+" endif
 Plug 'ervandew/supertab'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'terryma/vim-multiple-cursors'
-Plug 'w0rp/ale', { 'for': ['python', 'yaml'] }
+" Plug 'w0rp/ale', { 'for': ['python', 'yaml'] }
 Plug 'mhinz/vim-signify'
-Plug 'jiangmiao/auto-pairs'
 Plug 'Yggdroot/indentLine', { 'for': ['python', 'yaml'] }
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
 Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
 Plug 'kassio/neoterm'
-Plug 'tpope/vim-eunuch'
 Plug 'jeetsukumaran/vim-pythonsense', { 'for': 'python' }
-Plug 'pearofducks/ansible-vim', { 'do': 'cd ./UltiSnips; ./generate.py' }
+Plug 'pearofducks/ansible-vim', { 'do': 'cd ./UltiSnips; ./generate.py', 'for': 'yaml' }
 Plug 'easymotion/vim-easymotion'
 Plug 'jpalardy/vim-slime'
 Plug 'tpope/vim-commentary'
 Plug 'janko/vim-test'
 
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " PlugInstall and PlugUpdate will clone fzf in ~/.fzf and run the install script
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -72,6 +70,9 @@ autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
 " Sets how many lines of history VIM has to remember
 set history=5000
+
+" You will have bad experience for diagnostic messages when it's default 4000.
+set updatetime=300
 
 if has('persistent_undo')
     " Maintain undo history between sessions
@@ -228,7 +229,7 @@ set laststatus=2
 set lazyredraw 
 
 " Cmd line height
-set cmdheight=1
+set cmdheight=2
 
 " Remember cursor position between vim sessions
 autocmd BufReadPost *
@@ -262,46 +263,46 @@ com! FormatJSON %!python -m json.tool
 
 " ====> Jedi-vim Settings
 " let g:jedi#force_py_version=3
-let g:jedi#auto_initialization = 1
-let g:jedi#auto_vim_configuration = 0
-" Using deoplete-jedi instead
-let g:jedi#completions_command = ""
-let g:jedi#completions_enabled = 0 
-let g:jedi#popup_on_dot = 0
-let g:jedi#show_call_signatures = "0"
-
-let g:jedi#documentation_command = "<leader>k"
-let g:jedi#goto_assignments_command = "<leader>g"
-let g:jedi#goto_command = "<leader>d"
-let g:jedi#rename_command = "<leader>r"
-let g:jedi#usages_command = "<leader>n"
-let g:jedi#use_tabs_not_buffers = 0  " Open in buffer instead
-let g:jedi#force_py_version=3
+" let g:jedi#auto_initialization = 1
+" let g:jedi#auto_vim_configuration = 0
+" " Using deoplete-jedi instead
+" let g:jedi#completions_command = ""
+" let g:jedi#completions_enabled = 0 
+" let g:jedi#popup_on_dot = 0
+" let g:jedi#show_call_signatures = "0"
+" 
+" let g:jedi#documentation_command = "<leader>k"
+" let g:jedi#goto_assignments_command = "<leader>g"
+" let g:jedi#goto_command = "<leader>d"
+" let g:jedi#rename_command = "<leader>r"
+" let g:jedi#usages_command = "<leader>n"
+" let g:jedi#use_tabs_not_buffers = 0  " Open in buffer instead
+" let g:jedi#force_py_version=3
 
 
 " ====> Ale Settings
 " let g:ale_python_flake8_executable = 'flake8'
-let g:ale_completion_enabled = 0
-let g:ale_linters_explicit = 1
-let g:ale_fix_on_save = 1
-let g:ale_fixers = {
-        \'python': ['autopep8'],
-    \}
-let g:ale_lint_on_enter = 0
-let g:ale_linters = {
-        \'python': ['flake8', 'pylint'],
-        \'yaml': ['yamllint'],
-        \'ansible': ['ansible-lint']
-    \}
-let g:ale_python_flake8_options='--ignore=E501 --max-line-length=120'
-let g:ale_python_pylint_options='--max-line-length=120'
-let g:ale_python_autopep8_options='--max-line-length=120'
-let g:ale_sign_error = 'E'
-let g:ale_sign_warning = 'W'
-let g:ale_sign_column_always = 1
-let g:ale_echo_msg_format = '[%linter%] %code: %%s'
-let g:ale_lint_on_insert_leave = 1
-let g:ale_lint_on_text_changed = 'normal'
+" let g:ale_completion_enabled = 0
+" let g:ale_linters_explicit = 1
+" let g:ale_fix_on_save = 1
+" let g:ale_fixers = {
+"         \'python': ['autopep8'],
+"     \}
+" let g:ale_lint_on_enter = 0
+" let g:ale_linters = {
+"         \'python': ['flake8', 'pylint'],
+"         \'yaml': ['yamllint'],
+"         \'ansible': ['ansible-lint']
+"     \}
+" let g:ale_python_flake8_options='--ignore=E501 --max-line-length=120'
+" let g:ale_python_pylint_options='--max-line-length=120'
+" let g:ale_python_autopep8_options='--max-line-length=120'
+" let g:ale_sign_error = 'E'
+" let g:ale_sign_warning = 'W'
+" let g:ale_sign_column_always = 1
+" let g:ale_echo_msg_format = '[%linter%] %code: %%s'
+" let g:ale_lint_on_insert_leave = 1
+" let g:ale_lint_on_text_changed = 'normal'
 
 " ====> Airline Settings
 let g:airline_theme='luna'
@@ -354,7 +355,7 @@ let g:airline#extensions#tagbar#enabled = 0
 " ====> Gitgutter Settings
 let g:gitgutter_map_keys = 0  " To disable all key mappings:
 
-" ====> vim-multiple-cursors Settings
+" " ====> vim-multiple-cursors Settings
 let g:multi_cursor_use_default_mapping=0
 let g:multi_cursor_start_word_key      = '<C-n>'
 let g:multi_cursor_select_all_key      = 'g<C-n>'
@@ -384,23 +385,16 @@ if !isdirectory(s:vim_tags)
    silent! call mkdir(s:vim_tags, 'p')
 endif
 
-
-" ====> AutoPairs Settings
-let g:AutoPairsShortcutToggle = ''
-let g:AutoPairsShortcutFastWrap = ''
-let g:AutoPairsShortcutJump = ''
-let g:AutoPairsShortcutBackInsert = ''
-
 " deoplete Settings
-let g:deoplete#enable_at_startup = 1
-call deoplete#custom#option({
-            \'ignore_sources': {
-		\ '_': ['tag', 'buffer']
-		\},
-            \'ignore_case': v:true,
-            \'smart_case': v:true,
-            \'auto_complete_delay': 0,
-        \})
+" let g:deoplete#enable_at_startup = 1
+" call deoplete#custom#option({
+"             \'ignore_sources': {
+" 		\ '_': ['tag', 'buffer']
+" 		\},
+"             \'ignore_case': v:true,
+"             \'smart_case': v:true,
+"             \'auto_complete_delay': 0,
+"         \})
 " function g:Multiple_cursors_before()
 "     call deoplete#custom#buffer_option('auto_complete', v:false)
 " endfunction
@@ -409,8 +403,8 @@ call deoplete#custom#option({
 " endfunction
 
 " deoplete-jedi Settings
-let g:deoplete#sources#jedi#show_docstring = 1
-let g:deoplete#sources#jedi#enable_typeinfo = 1
+" let g:deoplete#sources#jedi#show_docstring = 1
+" let g:deoplete#sources#jedi#enable_typeinfo = 1
 
 
 " Tagbar Settings
@@ -494,3 +488,58 @@ let test#strategy = {
   \ 'file':    'neoterm',
   \ 'suite':   'neoterm',
 \}
+
+" ====> coc Settings
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+" Remap keys for gotos
+nmap <silent> <leader>d <Plug>(coc-definition)
+nmap <silent> <leader>r <Plug>(coc-references)
+" Show all diagnostics
+nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+" Manage extensions
+nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+" Show commands
+nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+" Do default action for next item.
+nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+" Resume latest coc list
+nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+vmap <leader>s  <Plug>(coc-format-selected)
+nmap <leader>s  <Plug>(coc-format-selected)
+" Show yank history
+nnoremap <silent> <space>y  :<C-u>CocList -A --normal yank<cr>
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
+" Coc only does snippet and additional edit on confirm.
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" Use <C-l> for trigger snippet expand.
+imap <C-l> <Plug>(coc-snippets-expand)
+
+" Use <C-j> for select text for visual placeholder of snippet.
+vmap <C-j> <Plug>(coc-snippets-select)
+
+" Use <C-j> for jump to next placeholder, it's default of coc.nvim
+let g:coc_snippet_next = '<c-j>'
+
+" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
+let g:coc_snippet_prev = '<c-k>'
+
+" <coc-snippet> settings
+" Use <C-j> for both expand and jump (make expand higher priority.)
+imap <C-j> <Plug>(coc-snippets-expand-jump)
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+let g:coc_snippet_next = '<tab>'
+
+" <Coc-highlight> settings
+autocmd CursorHold * silent call CocActionAsync('highlight')
+hi CocHighlightText guibg=Brown
