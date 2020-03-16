@@ -83,7 +83,6 @@ plugins=(
   tmux
   copydir
   django
-  vi-mode
 )
 ZSH_DISABLE_COMPFIX="true"
 source $ZSH/oh-my-zsh.sh
@@ -138,6 +137,7 @@ alias ld='ls -lGhd'
 alias jp='ssh -q root@dev-jp-001'
 alias jp2='ssh -q root@dev-jp-002'
 alias activate='source ./env/bin/activate'
+alias ac='activate'
 alias snow_hosts='/Users/jimmpan/devenv/esp_cli/env/bin/python -m esp_cli.snow_hosts --config=/Users/jimmpan/devenv/__no__/snow_jimmy.yaml'
 alias iaca='cd ~/devenv/GIS-IAC/api_router && ll &&activate'
 alias iacp='cd ~/devenv/GIS-IAC/iac-ansible && ll &&activate'

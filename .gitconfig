@@ -18,3 +18,5 @@
 	name = Jimmy Pan
 [core]
 	editor = nvim
+[credential]
+	helper = osxkeychain

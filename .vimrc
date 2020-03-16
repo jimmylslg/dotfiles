@@ -8,19 +8,11 @@ Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'edkolev/tmuxline.vim'
-" Plug 'davidhalter/jedi-vim', { 'for': 'python' }
-" if has('nvim') 
-"     Plug 'Shougo/deoplete.nvim', { 
-"                 \'do': ':UpdateRemotePlugins',
-"                 \} 
-"     Plug 'zchee/deoplete-jedi', { 'for': 'python' }
-" endif
 Plug 'ervandew/supertab'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'terryma/vim-multiple-cursors'
-" Plug 'w0rp/ale', { 'for': ['python', 'yaml'] }
-Plug 'mhinz/vim-signify'
+Plug 'airblade/vim-gitgutter'
 Plug 'Yggdroot/indentLine', { 'for': ['python', 'yaml'] }
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'christoomey/vim-tmux-navigator'
@@ -72,7 +64,7 @@ autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 set history=5000
 
 " You will have bad experience for diagnostic messages when it's default 4000.
-set updatetime=300
+set updatetime=100
 
 if has('persistent_undo')
     " Maintain undo history between sessions
@@ -354,6 +346,12 @@ let g:airline#extensions#tagbar#enabled = 0
 
 " ====> Gitgutter Settings
 let g:gitgutter_map_keys = 0  " To disable all key mappings:
+" nmap ]h <Plug>(GitGutterNextHunk)
+" nmap [h <Plug>(GitGutterPrevHunk)
+" nmap <leader>hs <Plug>(GitGutterStageHunk)
+" nmap <leader>hu <Plug>(GitGutterUndoHunk)
+" nmap <leader>hp <Plug>(GitGutterPreviewHunk)
+" let g:gitgutter_highlight_linenrs = 1
 
 " " ====> vim-multiple-cursors Settings
 let g:multi_cursor_use_default_mapping=0
@@ -364,14 +362,14 @@ let g:multi_cursor_prev_key            = '<C-p>'
 let g:multi_cursor_skip_key            = '<C-x>'
 let g:multi_cursor_quit_key            = '<Esc>'
 
- " ====> Signify Settings
-let g:signify_realtime = 1
-let g:signify_vcs_list = [ 'git' ]
+" ====> Signify Settings
+" let g:signify_realtime = 1
+" let g:signify_vcs_list = [ 'git' ]
 
 " ====> AsyncRun Settings
-let g:asyncrun_open = 8
-let g:asyncrun_bell = 1
-noremap <F9> :call asyncrun#quickfix_toggle(8)<cr> 
+" let g:asyncrun_open = 8
+" let g:asyncrun_bell = 1
+" noremap <F9> :call asyncrun#quickfix_toggle(8)<cr> 
 
 
 " ====> Vim-Gutentags Settings
@@ -543,3 +541,6 @@ let g:coc_snippet_next = '<tab>'
 " <Coc-highlight> settings
 autocmd CursorHold * silent call CocActionAsync('highlight')
 hi CocHighlightText guibg=Brown
+
+" <coc-prettier>
+command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
