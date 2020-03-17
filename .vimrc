@@ -332,7 +332,6 @@ let g:airline#extensions#tabline#buffer_idx_format = {
         \ '8': '8 ',
         \ '9': '9 ',
         \}
-let g:airline#extensions#ale#enabled = 1
 let g:airline#extensions#tmuxline#enabled = 1
 let airline#extensions#tmuxline#snapshot_file = "~/.tmux-status.conf"
 let g:tmuxline_preset = {
@@ -343,6 +342,7 @@ let g:tmuxline_preset = {
       \'y'    : ['%R', '%a','%m/%d/%Y'],
       \'z'    : '#H'}
 let g:airline#extensions#tagbar#enabled = 0
+let g:airline#extensions#coc#enabled = 0
 
 " ====> Gitgutter Settings
 let g:gitgutter_map_keys = 0  " To disable all key mappings:
@@ -496,6 +496,16 @@ inoremap <silent><expr> <c-space> coc#refresh()
 " Remap keys for gotos
 nmap <silent> <leader>d <Plug>(coc-definition)
 nmap <silent> <leader>r <Plug>(coc-references)
+" Use K to show documentation in preview window.
+nnoremap <leader>k :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
 " Show all diagnostics
 nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
 " Manage extensions
