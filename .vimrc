@@ -446,6 +446,9 @@ let g:fzf_buffers_jump = 1
 let g:fzf_tags_command = 'ctags -R'
 " Using the custom window creation function
 let g:fzf_layout = { 'window': 'call OpenFloatingWin()' }
+" Disable preview windows
+let g:fzf_preview_window = ''
+" Floating windows
 function! OpenFloatingWin()
   let height = &lines - 3
   let width = float2nr(&columns - (&columns * 2 / 10))
