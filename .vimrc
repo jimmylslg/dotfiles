@@ -25,6 +25,7 @@ Plug 'easymotion/vim-easymotion'
 Plug 'jpalardy/vim-slime'
 Plug 'tpope/vim-commentary'
 Plug 'janko/vim-test'
+Plug 'skywind3000/asyncrun.vim'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
@@ -367,9 +368,13 @@ let g:multi_cursor_quit_key            = '<Esc>'
 " let g:signify_vcs_list = [ 'git' ]
 
 " ====> AsyncRun Settings
-" let g:asyncrun_open = 8
-" let g:asyncrun_bell = 1
-" noremap <F9> :call asyncrun#quickfix_toggle(8)<cr> 
+let g:asyncrun_open = 8
+let g:asyncrun_bell = 1
+noremap <F9> :call asyncrun#quickfix_toggle(8)<cr> 
+augroup python_file
+    autocmd!
+    autocmd FileType python nnoremap <F10> :AsyncRun python -u "%"<CR>
+augroup END
 
 
 " ====> Vim-Gutentags Settings
@@ -556,4 +561,4 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 hi CocHighlightText guibg=Brown
 
 " <coc-prettier>
-command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
