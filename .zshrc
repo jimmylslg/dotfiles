@@ -148,14 +148,14 @@ alias gco='git checkout $(git branch |fzf)'
 # The Silver Searcher is even faster than Ack.
 # https://github.com/ggreer/the_silver_searcher
 if _has ag; then
-  alias ag='ag --color-path 1\;31 --color-match 1\;32 --color -U --path-to-ignore ~/.ignore'
+  alias ag='ag --color-path 1\;31 --color-match 1\;32 --color -U --hidden --path-to-ignore ~/.ignore'
 fi
 
 #FZF
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 # fzf + ag configuration
 if _has fzf && _has ag; then
-  export FZF_DEFAULT_COMMAND='ag -U --nocolor --path-to-ignore ~/.ignore -g ""'
+  export FZF_DEFAULT_COMMAND='ag -U --hidden --nocolor --path-to-ignore ~/.ignore -g ""'
   export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
   export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND"
   export FZF_DEFAULT_OPTS='
