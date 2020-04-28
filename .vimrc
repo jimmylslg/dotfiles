@@ -26,6 +26,7 @@ Plug 'jpalardy/vim-slime'
 Plug 'tpope/vim-commentary'
 Plug 'janko/vim-test'
 Plug 'skywind3000/asyncrun.vim'
+Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
@@ -525,6 +526,10 @@ nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 vmap <leader>s  <Plug>(coc-format-selected)
 nmap <leader>s  <Plug>(coc-format-selected)
+" Remap keys for applying codeAction to the current line.
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Apply AutoFix to problem on the current line.
+nmap <leader>qf  <Plug>(coc-fix-current)
 " Show yank history
 nnoremap <silent> <space>y  :<C-u>CocList -A --normal yank<cr>
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
@@ -557,8 +562,8 @@ endfunction
 let g:coc_snippet_next = '<tab>'
 
 " <Coc-highlight> settings
-autocmd CursorHold * silent call CocActionAsync('highlight')
-hi CocHighlightText guibg=Brown
+" autocmd CursorHold * silent call CocActionAsync('highlight')
+" hi CocHighlightText guibg=Brown
 
 " <coc-prettier>
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
