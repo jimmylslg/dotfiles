@@ -9,3 +9,8 @@ let g:python3_host_prog = $HOME . '/.config/nvim/neovim_env/bin/python3'
 
 set clipboard+=unnamedplus
 
+" if exists('g:vscode')
+"     " VSCode extension
+" else
+"     " ordinary neovim
+" endif

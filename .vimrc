@@ -441,7 +441,10 @@ nmap <c-c>v     <Plug>SlimeConfig
 nnoremap <C-p> :Files<Cr>
 nnoremap <a-t> :BTags<Cr>
 nnoremap <a-T> :Tags<Cr>
+" Add additional args to Ag
+command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, '--path-to-ignore ~/.ignore --hidden', <bang>0)
 nnoremap <a-f> :Ag<Cr>
+
 autocmd! FileType fzf tnoremap <buffer> <esc> <c-c>
 let g:fzf_action = {
   \ 'ctrl-x': 'split',
@@ -453,7 +456,11 @@ let g:fzf_tags_command = 'ctags -R'
 " Using the custom window creation function
 let g:fzf_layout = { 'window': 'call OpenFloatingWin()' }
 " Disable preview windows
-let g:fzf_preview_window = ''
+" let g:fzf_preview_window = ''
+" command! -bang -nargs=? -complete=dir Files
+"     \ call fzf#vim#files(<q-args>,
+"     \ {'options': ['--layout=reverse', '--info=inline', '--preview', '~/.vim/plugged/fzf.vim/bin/preview.sh {}']}, 
+"     \ <bang>0)
 " Floating windows
 function! OpenFloatingWin()
   let height = &lines - 3
