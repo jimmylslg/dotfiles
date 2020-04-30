@@ -14,6 +14,7 @@
 #        Link: https://github.com/universal-ctags/ctags
 #   6: zsh needs to be installed
 #   7: Ag (the silver searcher) to be installed
+#      Bat to be installed
 #
 #   #   #   #   #   #   #   #   #   #   #   #   #   #   
 
