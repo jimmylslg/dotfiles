@@ -27,6 +27,9 @@ Plug 'tpope/vim-commentary'
 Plug 'janko/vim-test'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
+Plug 'honza/vim-snippets'
+Plug 'voldikss/vim-floaterm'
+
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
@@ -37,10 +40,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
 " Themes
-" Plug 'jdkanani/vim-material-theme'
-" Plug 'kaicataldo/material.vim'
-" Plug 'kristijanhusak/vim-hybrid-material'
-" Plug 'liuchengxu/space-vim-dark' 
+Plug 'bluz71/vim-nightfly-guicolors'
 Plug 'dracula/vim', { 'as': 'dracula' }
 
 " Initialize plugin system
@@ -63,7 +63,7 @@ filetype indent on
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
 " Sets how many lines of history VIM has to remember
-set history=5000
+set history=10000
 
 " You will have bad experience for diagnostic messages when it's default 4000.
 set updatetime=100
@@ -87,11 +87,8 @@ endif
 " Enable syntax
 syntax on
 
-let g:material_theme_style = 'dark'
 set background=dark
-" colorscheme material
-" colorscheme space-vim-dark
-colorscheme dracula
+colorscheme nightfly
 
 hi Normal guibg=NONE ctermbg=NONE
 hi Comment cterm=italic
@@ -129,7 +126,7 @@ set signcolumn=yes
 set ruler
 
 " Height of the command bar
-set cmdheight=2
+set cmdheight=1
 
 "set shiftwidth=4 tabstop=4 expandtab softtabstop=4
 set sw=4 et sts=4
@@ -213,6 +210,9 @@ vmap <s-tab> <gv
 " esc to remove highlight
 nnoremap <silent> <esc> :noh<cr>
 
+" save file
+nmap <silent> <C-S>          :update<CR>
+
 "restore backspace for deletion
 set backspace=indent,eol,start
 
@@ -246,60 +246,8 @@ autocmd bufenter * if (winnr('$') == 1 && &buftype ==# 'quickfix' ) |
 map <leader>e :e! ~/.vimrc<cr>
 autocmd! bufwritepost ~/.vimrc source ~/.config/nvim/init.vim | echo "reloaded"
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Function Helpers
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-com! FormatJSON %!python -m json.tool
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => plugins settings
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" ====> Jedi-vim Settings
-" let g:jedi#force_py_version=3
-" let g:jedi#auto_initialization = 1
-" let g:jedi#auto_vim_configuration = 0
-" " Using deoplete-jedi instead
-" let g:jedi#completions_command = ""
-" let g:jedi#completions_enabled = 0 
-" let g:jedi#popup_on_dot = 0
-" let g:jedi#show_call_signatures = "0"
-" 
-" let g:jedi#documentation_command = "<leader>k"
-" let g:jedi#goto_assignments_command = "<leader>g"
-" let g:jedi#goto_command = "<leader>d"
-" let g:jedi#rename_command = "<leader>r"
-" let g:jedi#usages_command = "<leader>n"
-" let g:jedi#use_tabs_not_buffers = 0  " Open in buffer instead
-" let g:jedi#force_py_version=3
-
-
-" ====> Ale Settings
-" let g:ale_python_flake8_executable = 'flake8'
-" let g:ale_completion_enabled = 0
-" let g:ale_linters_explicit = 1
-" let g:ale_fix_on_save = 1
-" let g:ale_fixers = {
-"         \'python': ['autopep8'],
-"     \}
-" let g:ale_lint_on_enter = 0
-" let g:ale_linters = {
-"         \'python': ['flake8', 'pylint'],
-"         \'yaml': ['yamllint'],
-"         \'ansible': ['ansible-lint']
-"     \}
-" let g:ale_python_flake8_options='--ignore=E501 --max-line-length=120'
-" let g:ale_python_pylint_options='--max-line-length=120'
-" let g:ale_python_autopep8_options='--max-line-length=120'
-" let g:ale_sign_error = 'E'
-" let g:ale_sign_warning = 'W'
-" let g:ale_sign_column_always = 1
-" let g:ale_echo_msg_format = '[%linter%] %code: %%s'
-" let g:ale_lint_on_insert_leave = 1
-" let g:ale_lint_on_text_changed = 'normal'
-
 " ====> Airline Settings
-let g:airline_theme='luna'
+let g:airline_theme='powerlineish'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#tab_nr_type = 1 
 let g:airline#extensions#tabline#fnamemod = ':t'
@@ -348,12 +296,6 @@ let g:airline#extensions#coc#enabled = 0
 
 " ====> Gitgutter Settings
 let g:gitgutter_map_keys = 0  " To disable all key mappings:
-" nmap ]h <Plug>(GitGutterNextHunk)
-" nmap [h <Plug>(GitGutterPrevHunk)
-" nmap <leader>hs <Plug>(GitGutterStageHunk)
-" nmap <leader>hu <Plug>(GitGutterUndoHunk)
-" nmap <leader>hp <Plug>(GitGutterPreviewHunk)
-" let g:gitgutter_highlight_linenrs = 1
 
 " " ====> vim-multiple-cursors Settings
 let g:multi_cursor_use_default_mapping=0
@@ -364,10 +306,6 @@ let g:multi_cursor_prev_key            = '<C-p>'
 let g:multi_cursor_skip_key            = '<C-x>'
 let g:multi_cursor_quit_key            = '<Esc>'
 
-" ====> Signify Settings
-" let g:signify_realtime = 1
-" let g:signify_vcs_list = [ 'git' ]
-
 " ====> AsyncRun Settings
 let g:asyncrun_open = 8
 let g:asyncrun_bell = 1
@@ -376,11 +314,32 @@ augroup python_file
     autocmd!
     autocmd FileType python nnoremap <F10> :AsyncRun python -u "%"<CR>
 augroup END
+" setup async runner that runs in floaterm
+" https://github.com/voldikss/vim-floaterm#integrate-with-asynctasksvim
+function! s:runner_proc(opts)
+  let curr_bufnr = floaterm#curr()
+  if has_key(a:opts, 'silent') && a:opts.silent == 1
+    call floaterm#hide()
+  endif
+  let cmd = 'cd ' . shellescape(getcwd())
+  call floaterm#terminal#send(curr_bufnr, [cmd])
+  call floaterm#terminal#send(curr_bufnr, [a:opts.cmd])
+  stopinsert
+  if &filetype == 'floaterm' && g:floaterm_autoinsert
+    call floaterm#util#startinsert()
+  endif
+endfunction
+
+let g:asyncrun_runner = get(g:, 'asyncrun_runner', {})
+let g:asyncrun_runner.floaterm = function('s:runner_proc')
+
+" ====> floaterm Settings
+let g:floaterm_keymap_toggle = '<leader>t'
 
 
 " ====> Vim-Gutentags Settings
 set tags=./.tags;
-let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project']
+let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project',]
 let g:gutentags_ctags_tagfile = '.tags'
 let s:vim_tags = expand('~/.vim/cache/tags')  " Define where the tag files being saved
 let g:gutentags_cache_dir = s:vim_tags
@@ -388,38 +347,23 @@ let g:gutentags_cache_dir = s:vim_tags
 if !isdirectory(s:vim_tags)
    silent! call mkdir(s:vim_tags, 'p')
 endif
-
-" deoplete Settings
-" let g:deoplete#enable_at_startup = 1
-" call deoplete#custom#option({
-"             \'ignore_sources': {
-" 		\ '_': ['tag', 'buffer']
-" 		\},
-"             \'ignore_case': v:true,
-"             \'smart_case': v:true,
-"             \'auto_complete_delay': 0,
-"         \})
-" function g:Multiple_cursors_before()
-"     call deoplete#custom#buffer_option('auto_complete', v:false)
-" endfunction
-" function g:Multiple_cursors_after()
-"     call deoplete#custom#buffer_option('auto_complete', v:true)
-" endfunction
-
-" deoplete-jedi Settings
-" let g:deoplete#sources#jedi#show_docstring = 1
-" let g:deoplete#sources#jedi#enable_typeinfo = 1
-
+" https://vimjc.com/vim-ctag.html#%E4%BA%8C%E3%80%81ctags%E5%8F%82%E6%95%B0%E4%BB%8B%E7%BB%8D
+let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
+let g:gutentags_ctags_extra_args += ['--c++-kinds=+pxI']
+let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
+let g:gutentags_ctags_exclude = ["**/env/**","**/__pycache__/**"]
 
 " Tagbar Settings
 nmap <F8> :TagbarToggle<CR>
 let g:tagbar_sort = 0
 
 " Neoterm Settings
-let g:neoterm_default_mod='vertical'
+let g:neoterm_default_mod='belowright'
 nmap gx <Plug>(neoterm-repl-send)
 xmap gx <Plug>(neoterm-repl-send)
 nmap gxx <Plug>(neoterm-repl-send-line)
+let g:neoterm_autoscroll=1
+let g:neoterm_size=16 "
 
 " ====> easymotion Settings
 let g:EasyMotion_do_mapping = 0
@@ -494,16 +438,20 @@ endfunction
 
 " ====> vim-test Settings
 let test#python#runner = 'djangotest'
-let test#strategy = "neovim"
 let g:test#preserve_screen = 1
-let test#neovim#term_position = "belowright"
-let test#strategy = {
-  \ 'nearest': 'neovim',
-  \ 'file':    'neoterm',
-  \ 'suite':   'neoterm',
-\}
+" Customized runner using AsyncRun in Floaterm
+function! AsyncRunFloat(cmd)
+  execute 'AsyncRun -mode=term -pos=floaterm '.a:cmd
+endfunction
+let g:test#custom_strategies = {'asyncrun_float': function('AsyncRunFloat')}
+" Set strategy to use custom strategie
+let g:test#strategy = 'asyncrun_float'
 
-" ====> coc Settings
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ====> coc Settings Start
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
 " Remap keys for gotos
@@ -521,8 +469,6 @@ function! s:show_documentation()
 endfunction
 " Show all diagnostics
 nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
-" Manage extensions
-nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
 " Show commands
 nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
 " Do default action for next item.
@@ -568,9 +514,16 @@ function! s:check_back_space() abort
 endfunction
 let g:coc_snippet_next = '<tab>'
 
-" <Coc-highlight> settings
-" autocmd CursorHold * silent call CocActionAsync('highlight')
-" hi CocHighlightText guibg=Brown
-
 " <coc-prettier>
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
+
+" <coc-explorer> settings
+nmap <space>e :CocCommand explorer<CR>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ====> coc Settings End
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" indentLine settings
+let g:indentLine_setColors = 0
+
