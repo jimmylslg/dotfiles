@@ -29,6 +29,7 @@ Plug 'skywind3000/asyncrun.vim'
 Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 Plug 'honza/vim-snippets'
 Plug 'voldikss/vim-floaterm'
+" TODO: Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -217,13 +218,12 @@ nmap <silent> <C-S>          :update<CR>
 set backspace=indent,eol,start
 
 " Always show the status line
-set laststatus=2
+set laststatus=1
+" Cmd line height
+set cmdheight=1
 
 " Don't redraw while executing macros (good performance config)
 set lazyredraw 
-
-" Cmd line height
-set cmdheight=2
 
 " Remember cursor position between vim sessions
 autocmd BufReadPost *
@@ -283,16 +283,15 @@ let g:airline#extensions#tabline#buffer_idx_format = {
         \ '9': '9 ',
         \}
 let g:airline#extensions#tmuxline#enabled = 1
-let airline#extensions#tmuxline#snapshot_file = "~/.tmux-status.conf"
 let g:tmuxline_preset = {
       \'a'    : '#S',
-      \'c'    : ['#(whoami)', '#(hostname)', '#(uptime | cut -d " " -f 1,2,3)'],
       \'win'  : ['#I', '#W'],
       \'cwin' : ['#I', '#W', '#F'],
       \'y'    : ['%R', '%a','%m/%d/%Y'],
       \'z'    : '#H'}
 let g:airline#extensions#tagbar#enabled = 0
 let g:airline#extensions#coc#enabled = 0
+let g:airline_powerline_fonts = 1
 
 " ====> Gitgutter Settings
 let g:gitgutter_map_keys = 0  " To disable all key mappings:
@@ -356,6 +355,7 @@ let g:gutentags_ctags_exclude = ["**/env/**","**/__pycache__/**"]
 " Tagbar Settings
 nmap <F8> :TagbarToggle<CR>
 let g:tagbar_sort = 0
+let g:tagbar_width = 30
 
 " Neoterm Settings
 let g:neoterm_default_mod='belowright'
@@ -459,7 +459,6 @@ nmap <silent> <leader>d <Plug>(coc-definition)
 nmap <silent> <leader>r <Plug>(coc-references)
 " Use K to show documentation in preview window.
 nnoremap <leader>k :call <SID>show_documentation()<CR>
-
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
     execute 'h '.expand('<cword>')
@@ -471,36 +470,24 @@ endfunction
 nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
 " Show commands
 nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
-" Do default action for next item.
-nnoremap <silent> <space>j  :<C-u>CocNext<CR>
-" Do default action for previous item.
-nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
-" Resume latest coc list
-nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+" Format selected
 vmap <leader>s  <Plug>(coc-format-selected)
 nmap <leader>s  <Plug>(coc-format-selected)
-" Remap keys for applying codeAction to the current line.
-nmap <leader>ac  <Plug>(coc-codeaction)
-" Apply AutoFix to problem on the current line.
-nmap <leader>qf  <Plug>(coc-fix-current)
 " Show yank history
 nnoremap <silent> <space>y  :<C-u>CocList -A --normal yank<cr>
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
 " Coc only does snippet and additional edit on confirm.
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-" Use <C-l> for trigger snippet expand.
-imap <C-l> <Plug>(coc-snippets-expand)
-
-" Use <C-j> for select text for visual placeholder of snippet.
-vmap <C-j> <Plug>(coc-snippets-select)
-
-" Use <C-j> for jump to next placeholder, it's default of coc.nvim
-let g:coc_snippet_next = '<c-j>'
-
-" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
-let g:coc_snippet_prev = '<c-k>'
 
 " <coc-snippet> settings
+" Use <C-l> for trigger snippet expand.
+imap <C-l> <Plug>(coc-snippets-expand)
+" Use <C-j> for select text for visual placeholder of snippet.
+vmap <C-j> <Plug>(coc-snippets-select)
+" Use <C-j> for jump to next placeholder, it's default of coc.nvim
+let g:coc_snippet_next = '<c-j>'
+" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
+let g:coc_snippet_prev = '<c-k>'
 " Use <C-j> for both expand and jump (make expand higher priority.)
 imap <C-j> <Plug>(coc-snippets-expand-jump)
 inoremap <silent><expr> <TAB>
@@ -519,11 +506,9 @@ command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
 " <coc-explorer> settings
 nmap <space>e :CocCommand explorer<CR>
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ====> coc Settings End
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " indentLine settings
 let g:indentLine_setColors = 0
-
