@@ -43,6 +43,9 @@ Plug 'junegunn/fzf.vim'
 " Themes
 Plug 'bluz71/vim-nightfly-guicolors'
 Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'morhetz/gruvbox'
+Plug 'tomasr/molokai'
+Plug 'rakr/vim-one'
 
 " Initialize plugin system
 call plug#end()
@@ -89,10 +92,11 @@ endif
 syntax on
 
 set background=dark
-colorscheme nightfly
-
-hi Normal guibg=NONE ctermbg=NONE
-hi Comment cterm=italic
+let g:one_allow_italics = 1
+colorscheme one
+" hi Normal guibg=NONE ctermbg=NONE
+" hi Comment cterm=italic
+"
 
 " Spell Color related
 hi! clear SpellBad
@@ -247,7 +251,8 @@ map <leader>e :e! ~/.vimrc<cr>
 autocmd! bufwritepost ~/.vimrc source ~/.config/nvim/init.vim | echo "reloaded"
 
 " ====> Airline Settings
-let g:airline_theme='powerlineish'
+let g:airline_theme='one'
+let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#tab_nr_type = 1 
 let g:airline#extensions#tabline#fnamemod = ':t'
@@ -291,7 +296,7 @@ let g:tmuxline_preset = {
       \'z'    : '#H'}
 let g:airline#extensions#tagbar#enabled = 0
 let g:airline#extensions#coc#enabled = 0
-let g:airline_powerline_fonts = 1
+
 
 " ====> Gitgutter Settings
 let g:gitgutter_map_keys = 0  " To disable all key mappings:
@@ -506,9 +511,18 @@ command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
 " <coc-explorer> settings
 nmap <space>e :CocCommand explorer<CR>
+
+" <coc-actions> settings
+" Remap for do codeAction of selected region
+function! s:cocActionsOpenFromSelected(type) abort
+  execute 'CocCommand actions.open ' . a:type
+endfunction
+xmap <silent> <leader>a :<C-u>execute 'CocCommand actions.open ' . visualmode()<CR>
+nmap <silent> <leader>a :<C-u>set operatorfunc=<SID>cocActionsOpenFromSelected<CR>g@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ====> coc Settings End
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " indentLine settings
 let g:indentLine_setColors = 0
+let g:indentLine_fileType = ['python']

@@ -19,9 +19,9 @@ _has() {
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-# ZSH_THEME="robbyrussell"
+ZSH_THEME="robbyrussell"
 # ZSH_THEME="punctual"
-ZSH_THEME="kayid"
+# ZSH_THEME="kayid"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -144,7 +144,7 @@ alias iacp='cd ~/devenv/GIS-IAC/iac-ansible && ll &&activate'
 alias es='nvim $(fzf)'
 alias gco='git checkout $(git branch |fzf)'
 # Need bat to be installed
-alias bat="bat --theme=\$(defaults read -globalDomain AppleInterfaceStyle &> /dev/null && echo default || echo GitHub)"
+export BAT_THEME="OneHalfDark"
 alias cat="bat"
 
 
@@ -165,8 +165,6 @@ if _has fzf && _has ag; then
   --height 40%
   --layout=reverse
   --border
-  --color fg:242,bg:236,hl:65,fg+:15,bg+:239,hl+:108
-  --color info:108,prompt:109,spinner:108,pointer:168,marker:168
   --preview "bat --style=numbers --color=always {} | head -500"
   '
 fi
