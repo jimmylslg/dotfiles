@@ -1,1 +1,62 @@
-/Users/jimmpan/.config/nvim/coc-settings.json
+{
+    // coc settting
+    "coc.preferences.formatOnSaveFiletypes": [
+        "python",
+        "json",
+        "css",
+        "Markdown",
+    ],
+    "coc.preferences.colorSupport": true,
+    "diagnostic.refreshOnInsertMode": true,
+    "diagnostic.enable": true,
+    "diagnostic.virtualText": false,
+    "diagnostic.virtualTextPrefix": " ❯❯❯ ",
+    "list.source.outline.defaultOptions": [
+        "--auto-preview"
+    ],
+    // python auto-completion
+    "python.jediEnabled": false,
+    // python linting
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": true,
+    "python.linting.pylintArgs": [
+        "--max-line-length=120"
+    ],
+    "python.linting.flake8Enabled": true,
+    "python.linting.flake8Args": [
+        "--ignore=E501,E262"
+    ],
+    // python formatting
+    "python.formatting.provider": "yapf",
+    "python.formatting.yapfArgs": [
+        "--style",
+        "{based_on_style: google, indent_width: 4, column_limit: 120}"
+    ],
+    // coc-git setting
+    "git.enableGutters": true,
+    "git.branchCharacter": "\uf408",
+    "git.addGBlameToBufferVar": true,
+    "git.addGBlameToVirtualText": false,
+    "git.virtualTextPrefix": " ❯❯❯ ",
+    "git.addedSign.hlGroup": "GitGutterAdd",
+    "git.changedSign.hlGroup": "GitGutterChange",
+    "git.removedSign.hlGroup": "GitGutterDelete",
+    "git.topRemovedSign.hlGroup": "GitGutterDelete",
+    "git.changeRemovedSign.hlGroup": "GitGutterChangeDelete",
+    // coc-prettier setting
+    "prettier.printWidth": 120,
+    "prettier.tabWidth": 4,
+    "prettier.trailingComma": "es5",
+    // coc-docker
+    "docker.enable": true,
+    // coc-html
+    "html.autoClosingTags": true,
+    "html.format.enable": true,
+    "html.enable":true,
+    // coc-explorer
+    "explorer.width": 30,
+    "explorer.file.showHiddenFiles": true,
+    "explorer.icon.enableNerdfont": true,
+    //
+    //hahahahha
+}
