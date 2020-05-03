@@ -118,7 +118,7 @@ alias n=nvim
 if type nvim > /dev/null 2>&1; then
   alias vim='nvim'
 fi
-alias e=nvim
+alias e=vim
 alias ipy="python -c 'import IPython; IPython.terminal.ipapp.launch_new_instance()'"
 alias editvim='vim ~/.vimrc'
 alias editzsh='vim ~/.zshrc'
@@ -126,51 +126,40 @@ alias edittmux='vim ~/.tmux.conf'
 alias ll='ls -lGh'
 alias gs='git status'
 alias gd='git diff'
-alias sls='screen -ls'
-alias sr='screen -r'
 alias ssh='ssh -q'
 alias grep='grep --color=auto'
 alias zogs='ssh -q zogs'
 alias kal-el='ssh -q kal-el'
 alias s='ssh -q'
 alias ld='ls -lGhd'
-alias jp='ssh -q root@dev-jp-001'
-alias jp2='ssh -q root@dev-jp-002'
-alias activate='source ./env/bin/activate'
-alias ac='activate'
+alias ac='source ./env/bin/activate'
+alias da='source ./env/bin/deactivate'
 alias snow_hosts='/Users/jimmpan/devenv/esp_cli/env/bin/python -m esp_cli.snow_hosts --config=/Users/jimmpan/devenv/__no__/snow_jimmy.yaml'
-alias iaca='cd ~/devenv/GIS-IAC/api_router && ll &&activate'
-alias iacp='cd ~/devenv/GIS-IAC/iac-ansible && ll &&activate'
-alias es='nvim $(fzf)'
-alias gco='git checkout $(git branch |fzf)'
-# Need bat to be installed
-export BAT_THEME="OneHalfDark"
-alias cat="bat"
+alias iaca='cd ~/devenv/GIS-IAC/api_router && ll &&ac'
+alias iacp='cd ~/devenv/GIS-IAC/iac-ansible && ll &&ac'
 
 
-export RIPGREP_CONFIG_PATH=$HOME/dotfiles/.ripgreprc
-
-# The Silver Searcher is even faster than Ack.
-# https://github.com/ggreer/the_silver_searcher
-if _has ag; then
-    alias ag='ag --color-path 1\;31 --color-match 1\;32 --color -U --hidden --path-to-ignore $HOME/dotfiles/.ignore'
-fi
-
-#FZF
+# FZF & Rg Configuration
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-# fzf + ag configuration
-if _has fzf && _has ag; then
-  export FZF_DEFAULT_COMMAND='ag -U --hidden --nocolor --path-to-ignore $HOME/dotfiles/.ignore -g ""'
+if _has fzf && _has rg && _has bat; then
+  # RG
+  export RIPGREP_CONFIG_PATH=$HOME/dotfiles/.ripgreprc
+  # FZF
+  export FZF_DEFAULT_COMMAND='rg --files'
   export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-  export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND"
   export FZF_DEFAULT_OPTS='
-  --height 40%
-  --layout=reverse
-  --border
-  --preview "bat --style=numbers --color=always {} | head -500"
-  '
+      --height 60%
+      --layout=reverse
+      --border
+      '
+  # Bat
+  export BAT_THEME="OneHalfDark"
+  alias cat="bat"
+  alias es='nvim $(fzf --preview "bat --style=numbers --color=always {} | head -500")'
+  alias gco='git checkout $(git branch |fzf)'
 fi
 
+# --preview "bat --style=numbers --color=always {} | head -500"
 
 # autojump
 [[ -s $HOME/.autojump/etc/profile.d/autojump.sh ]] && source $HOME/.autojump/etc/profile.d/autojump.sh

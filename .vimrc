@@ -6,7 +6,7 @@ call plug#begin('~/.vim/plugged')
 " Plugins
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+" Plug 'vim-airline/vim-airline-themes'
 Plug 'edkolev/tmuxline.vim'
 Plug 'ervandew/supertab'
 Plug 'tpope/vim-surround'
@@ -29,7 +29,9 @@ Plug 'skywind3000/asyncrun.vim'
 Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 Plug 'honza/vim-snippets'
 Plug 'voldikss/vim-floaterm'
+Plug 'ryanoasis/vim-devicons'
 " TODO: Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+" TODO: https://github.com/wincent/ferret#user-content-ack
 
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -41,10 +43,10 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
 " Themes
-Plug 'bluz71/vim-nightfly-guicolors'
-Plug 'dracula/vim', { 'as': 'dracula' }
-Plug 'morhetz/gruvbox'
-Plug 'tomasr/molokai'
+" Plug 'bluz71/vim-nightfly-guicolors'
+" Plug 'dracula/vim', { 'as': 'dracula' }
+" Plug 'morhetz/gruvbox'
+" Plug 'tomasr/molokai'
 Plug 'rakr/vim-one'
 
 " Initialize plugin system
@@ -67,7 +69,7 @@ filetype indent on
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
 " Sets how many lines of history VIM has to remember
-set history=10000
+set history=5000
 
 " You will have bad experience for diagnostic messages when it's default 4000.
 set updatetime=100
@@ -83,8 +85,6 @@ set so=7
 
 "Color related
 if exists('+termguicolors')
-    " let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
-    " let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
     set termguicolors
 endif
 
@@ -94,9 +94,6 @@ syntax on
 set background=dark
 let g:one_allow_italics = 1
 colorscheme one
-" hi Normal guibg=NONE ctermbg=NONE
-" hi Comment cterm=italic
-"
 
 " Spell Color related
 hi! clear SpellBad
@@ -155,7 +152,7 @@ set number relativenumber
 set numberwidth=1
 
 " Add a bit extra margin to the left
-set foldcolumn=1
+set foldcolumn=0
 
 " Set colorcolumn
 set colorcolumn=120 
@@ -216,7 +213,7 @@ vmap <s-tab> <gv
 nnoremap <silent> <esc> :noh<cr>
 
 " save file
-nmap <silent> <C-S>          :update<CR>
+nmap <silent> <C-S> :update<CR>
 
 "restore backspace for deletion
 set backspace=indent,eol,start
@@ -333,7 +330,6 @@ function! s:runner_proc(opts)
     call floaterm#util#startinsert()
   endif
 endfunction
-
 let g:asyncrun_runner = get(g:, 'asyncrun_runner', {})
 let g:asyncrun_runner.floaterm = function('s:runner_proc')
 
@@ -388,11 +384,9 @@ nmap <c-c>v     <Plug>SlimeConfig
 
 " ====> FZF-vim Settings
 nnoremap <C-p> :Files<Cr>
-nnoremap <a-t> :BTags<Cr>
-nnoremap <a-T> :Tags<Cr>
-" Add additional args to Ag
-command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, '--path-to-ignore ~/.ignore --hidden', <bang>0)
-nnoremap <a-f> :Ag<Cr>
+nnoremap <a-T> :BTags<Cr>
+nnoremap <a-t> :Tags<Cr>
+nnoremap <a-f> :Rg<Cr>
 
 autocmd! FileType fzf tnoremap <buffer> <esc> <c-c>
 let g:fzf_action = {
@@ -402,44 +396,6 @@ let g:fzf_action = {
 let g:fzf_buffers_jump = 1
 " [Tags] Command to generate tags file
 let g:fzf_tags_command = 'ctags -R'
-" Using the custom window creation function
-let g:fzf_layout = { 'window': 'call OpenFloatingWin()' }
-" Disable preview windows
-" let g:fzf_preview_window = ''
-" command! -bang -nargs=? -complete=dir Files
-"     \ call fzf#vim#files(<q-args>,
-"     \ {'options': ['--layout=reverse', '--info=inline', '--preview', '~/.vim/plugged/fzf.vim/bin/preview.sh {}']}, 
-"     \ <bang>0)
-" Floating windows
-function! OpenFloatingWin()
-  let height = &lines - 3
-  let width = float2nr(&columns - (&columns * 2 / 10))
-  let col = float2nr((&columns - width) / 2)
-
-  " 设置浮动窗口打开的位置，大小等。
-  " 这里的大小配置可能不是那么的 flexible 有继续改进的空间
-  let opts = {
-        \ 'relative': 'editor',
-        \ 'row': height * 0.3,
-        \ 'col': col + 30,
-        \ 'width': width * 2 / 3,
-        \ 'height': height / 2
-        \ }
-
-  let buf = nvim_create_buf(v:false, v:true)
-  let win = nvim_open_win(buf, v:true, opts)
-
-  " 设置浮动窗口高亮
-  call setwinvar(win, '&winhl', 'Normal:Pmenu')
-
-  setlocal
-        \ buftype=nofile
-        \ nobuflisted
-        \ bufhidden=hide
-        \ nonumber
-        \ norelativenumber
-        \ signcolumn=no
-endfunction
 
 " ====> vim-test Settings
 let test#python#runner = 'djangotest'
