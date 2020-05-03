@@ -32,7 +32,7 @@ Plug 'voldikss/vim-floaterm'
 Plug 'ryanoasis/vim-devicons'
 " TODO: Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 " TODO: https://github.com/wincent/ferret#user-content-ack
-
+Plug 'mhinz/vim-startify'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
