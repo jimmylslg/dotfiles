@@ -1,0 +1,19 @@
+--smart-case
+--follow
+--max-columns=150
+--max-columns-preview
+
+# Show hidden files
+--hidden
+
+# Dont use any existing ignore files
+--no-ignore
+
+# ignore rules
+--glob=!**/env/**
+--glob=!**/__pycache__/**
+--glob=!**/.git/**
+--glob=!**/.vim/**
+--glob=!**/mongo_data/**
+--glob=!*.DS_store*
+--glob=!*.DS_Store*

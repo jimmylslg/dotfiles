@@ -148,6 +148,8 @@ export BAT_THEME="OneHalfDark"
 alias cat="bat"
 
 
+export RIPGREP_CONFIG_PATH=$HOME/dotfiles/.ripgreprc
+
 # The Silver Searcher is even faster than Ack.
 # https://github.com/ggreer/the_silver_searcher
 if _has ag; then
