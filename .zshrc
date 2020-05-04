@@ -1,5 +1,5 @@
 # If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
@@ -133,11 +133,14 @@ alias kal-el='ssh -q kal-el'
 alias s='ssh -q'
 alias ld='ls -lGhd'
 alias ac='source ./env/bin/activate'
-alias da='source ./env/bin/deactivate'
+alias da=deactivate
 alias snow_hosts='/Users/jimmpan/devenv/esp_cli/env/bin/python -m esp_cli.snow_hosts --config=/Users/jimmpan/devenv/__no__/snow_jimmy.yaml'
 alias iaca='cd ~/devenv/GIS-IAC/api_router && ll &&ac'
 alias iacp='cd ~/devenv/GIS-IAC/iac-ansible && ll &&ac'
 
+# Virtualenvwrapper setup
+export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
+source /usr/local/bin/virtualenvwrapper.sh
 
 # FZF & Rg Configuration
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

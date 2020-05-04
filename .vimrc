@@ -427,7 +427,7 @@ endfunction
 augroup auto_test
   autocmd!
   autocmd BufWrite * if test#exists() && g:autotest|
-    \   TestFile -strategy=asyncrun_background |
+    \   TestFile -v -strategy=asyncrun_background |
     \ endif
 augroup END
 

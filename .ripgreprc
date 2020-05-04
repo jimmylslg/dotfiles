@@ -15,5 +15,8 @@
 --glob=!**/.git/**
 --glob=!**/.vim/**
 --glob=!**/mongo_data/**
---glob=!*.DS_store*
---glob=!*.DS_Store*
+--glob=!**/.pytest*/**
+--glob=!*.DS_store
+--glob=!*.DS_Store
+--glob=!*.DS_Store
+--glob=!*.pyc
