@@ -213,7 +213,7 @@ vmap <s-tab> <gv
 nnoremap <silent> <esc> :noh<cr>
 
 " save file
-nmap <silent> <C-S> :update<CR>
+nmap <silent> <C-S> :w<CR>
 
 "restore backspace for deletion
 set backspace=indent,eol,start
@@ -240,6 +240,12 @@ autocmd bufwinenter quickfix nnoremap <silent> <buffer>
 autocmd bufenter * if (winnr('$') == 1 && &buftype ==# 'quickfix' ) |
                 \   bd|
                 \   q | endif
+
+" Exclude quickfix windows in bn & bp navigation
+augroup qf
+    autocmd!
+    autocmd FileType qf set nobuflisted
+augroup END
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Fast editing and reloading of vimrc configs
@@ -398,7 +404,7 @@ let g:fzf_buffers_jump = 1
 let g:fzf_tags_command = 'ctags -R'
 
 " ====> vim-test Settings
-let test#python#runner = 'djangotest'
+" let test#python#runner = 'djangotest'
 let g:test#preserve_screen = 1
 " Customized runner using AsyncRun in Floaterm
 function! AsyncRunFloat(cmd)
@@ -407,6 +413,23 @@ endfunction
 let g:test#custom_strategies = {'asyncrun_float': function('AsyncRunFloat')}
 " Set strategy to use custom strategie
 let g:test#strategy = 'asyncrun_float'
+" Toggle autotest on/off, default: off
+command! AutoTestToggle call AutoTestToggleFunction()
+" Logic for autotest
+let g:autotest=0
+function AutoTestToggleFunction()
+    if g:autotest
+        let g:autotest=0
+    else
+        let g:autotest=1
+    endif
+endfunction
+augroup auto_test
+  autocmd!
+  autocmd BufWrite * if test#exists() && g:autotest|
+    \   TestFile -strategy=asyncrun_background |
+    \ endif
+augroup END
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
