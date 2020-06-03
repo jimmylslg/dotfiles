@@ -363,7 +363,7 @@ let g:gutentags_ctags_exclude = ["**/env/**","**/__pycache__/**"]
 " Tagbar Settings
 nmap <F8> :TagbarToggle<CR>
 let g:tagbar_sort = 0
-let g:tagbar_width = 30
+let g:tagbar_width = 50
 
 " Neoterm Settings
 let g:neoterm_default_mod='belowright'
@@ -460,9 +460,14 @@ vmap <leader>s  <Plug>(coc-format-selected)
 nmap <leader>s  <Plug>(coc-format-selected)
 " Show yank history
 nnoremap <silent> <space>y  :<C-u>CocList -A --normal yank<cr>
-" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
-" Coc only does snippet and additional edit on confirm.
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
+" position. Coc only does snippet and additional edit on confirm.
+" <cr> could be remapped by other vim plugin, try `:verbose imap <CR>`.
+if exists('*complete_info')
+  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+else
+  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+endif
 
 " <coc-snippet> settings
 " Use <C-l> for trigger snippet expand.
@@ -491,14 +496,6 @@ command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
 " <coc-explorer> settings
 nmap <space>e :CocCommand explorer<CR>
-
-" <coc-actions> settings
-" Remap for do codeAction of selected region
-function! s:cocActionsOpenFromSelected(type) abort
-  execute 'CocCommand actions.open ' . a:type
-endfunction
-xmap <silent> <leader>a :<C-u>execute 'CocCommand actions.open ' . visualmode()<CR>
-nmap <silent> <leader>a :<C-u>set operatorfunc=<SID>cocActionsOpenFromSelected<CR>g@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ====> coc Settings End
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
