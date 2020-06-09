@@ -6,12 +6,9 @@ call plug#begin('~/.vim/plugged')
 " Plugins
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
-" Plug 'vim-airline/vim-airline-themes'
 Plug 'edkolev/tmuxline.vim'
-" Plug 'ervandew/supertab'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
-" Plug 'terryma/vim-multiple-cursors'
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'airblade/vim-gitgutter'
 Plug 'Yggdroot/indentLine', { 'for': ['python', 'yaml'] }
@@ -19,11 +16,9 @@ Plug 'ludovicchabant/vim-gutentags'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
 Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
-Plug 'kassio/neoterm'
 Plug 'jeetsukumaran/vim-pythonsense', { 'for': 'python' }
 Plug 'pearofducks/ansible-vim', { 'do': 'cd ./UltiSnips; ./generate.py', 'for': 'yaml' }
 Plug 'easymotion/vim-easymotion'
-Plug 'jpalardy/vim-slime'
 Plug 'tpope/vim-commentary'
 Plug 'janko/vim-test'
 Plug 'skywind3000/asyncrun.vim'
@@ -31,7 +26,6 @@ Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 Plug 'honza/vim-snippets'
 Plug 'voldikss/vim-floaterm'
 Plug 'ryanoasis/vim-devicons'
-" TODO: Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 " TODO: https://github.com/wincent/ferret#user-content-ack
 Plug 'mhinz/vim-startify'
 
@@ -305,14 +299,6 @@ let g:airline#extensions#coc#enabled = 0
 " ====> Gitgutter Settings
 let g:gitgutter_map_keys = 0  " To disable all key mappings:
 
-" " ====> vim-multiple-cursors Settings
-" let g:multi_cursor_use_default_mapping=0
-" let g:multi_cursor_start_word_key      = '<C-n>'
-" let g:multi_cursor_select_all_key      = 'g<C-n>'
-" let g:multi_cursor_next_key            = '<C-n>'
-" let g:multi_cursor_prev_key            = '<C-p>'
-" let g:multi_cursor_skip_key            = '<C-x>'
-" let g:multi_cursor_quit_key            = '<Esc>'
 
 " ====> AsyncRun Settings
 let g:asyncrun_open = 8
@@ -365,14 +351,6 @@ nmap <F8> :TagbarToggle<CR>
 let g:tagbar_sort = 0
 let g:tagbar_width = 50
 
-" Neoterm Settings
-let g:neoterm_default_mod='belowright'
-nmap gx <Plug>(neoterm-repl-send)
-xmap gx <Plug>(neoterm-repl-send)
-nmap gxx <Plug>(neoterm-repl-send-line)
-let g:neoterm_autoscroll=1
-let g:neoterm_size=16 "
-
 " ====> easymotion Settings
 let g:EasyMotion_do_mapping = 0
 nmap <Leader>f <Plug>(easymotion-overwin-f2)
@@ -380,14 +358,6 @@ nmap <Leader>w <Plug>(easymotion-overwin-w)
 let g:EasyMotion_smartcase = 1
 let g:EasyMotion_use_smartsign_us = 1
 
-" ====> vim-slime Settings
-let g:slime_target = "tmux"
-let g:slime_default_config = {"socket_name": get(split($TMUX, ","), 0), "target_pane": "{right}"}
-let g:slime_dont_ask_default = 1
-let g:slime_no_mappings = 1
-nmap <c-c><c-c> <ESC>:1,$SlimeSend<CR>  " Send entire file
-xmap <c-c><c-c> <Plug>SlimeRegionSend
-nmap <c-c>v     <Plug>SlimeConfig
 
 " ====> FZF-vim Settings
 nnoremap <C-p> :Files<Cr>
@@ -489,6 +459,7 @@ function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
+let g:coc_snippet_next = '<tab>'
 
 " <coc-prettier>
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
