@@ -328,6 +328,8 @@ let g:asyncrun_runner.floaterm = function('s:runner_proc')
 
 " ====> floaterm Settings
 let g:floaterm_keymap_toggle = '<leader>t'
+let g:floaterm_width = 0.9
+let g:floaterm_height = 0.9
 
 
 " ====> Vim-Gutentags Settings
@@ -401,6 +403,10 @@ augroup auto_test
     \   TestFile -v -strategy=asyncrun_background |
     \ endif
 augroup END
+nmap <silent> t<C-n> :TestNearest<CR>
+nmap <silent> t<C-f> :TestFile<CR>
+nmap <silent> t<C-s> :TestSuite<CR>
+nmap <silent> t<C-l> :TestLast<CR>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
