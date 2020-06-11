@@ -313,7 +313,7 @@ augroup END
 function! s:runner_proc(opts)
   let curr_bufnr = floaterm#curr()
   if has_key(a:opts, 'silent') && a:opts.silent == 1
-    call floaterm#hide()
+    call floaterm#hide(1, '')
   endif
   let cmd = 'cd ' . shellescape(getcwd())
   call floaterm#terminal#send(curr_bufnr, [cmd])
