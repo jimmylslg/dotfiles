@@ -47,4 +47,5 @@
     "explorer.file.showHiddenFiles": true,
     "explorer.icon.enableNerdfont": true,
     "explorer.icon.enableVimDevicons": true,
+    "git.enableGutters": false,
 }

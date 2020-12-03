@@ -6,23 +6,19 @@ call plug#begin('~/.vim/plugged')
 " Plugins
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
-" Plug 'vim-airline/vim-airline-themes'
 Plug 'edkolev/tmuxline.vim'
-Plug 'ervandew/supertab'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
-Plug 'terryma/vim-multiple-cursors'
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'airblade/vim-gitgutter'
 Plug 'Yggdroot/indentLine', { 'for': ['python', 'yaml'] }
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
 Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
-Plug 'kassio/neoterm'
 Plug 'jeetsukumaran/vim-pythonsense', { 'for': 'python' }
 Plug 'pearofducks/ansible-vim', { 'do': 'cd ./UltiSnips; ./generate.py', 'for': 'yaml' }
 Plug 'easymotion/vim-easymotion'
-Plug 'jpalardy/vim-slime'
 Plug 'tpope/vim-commentary'
 Plug 'janko/vim-test'
 Plug 'skywind3000/asyncrun.vim'
@@ -30,7 +26,6 @@ Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 Plug 'honza/vim-snippets'
 Plug 'voldikss/vim-floaterm'
 Plug 'ryanoasis/vim-devicons'
-" TODO: Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 " TODO: https://github.com/wincent/ferret#user-content-ack
 Plug 'mhinz/vim-startify'
 
@@ -304,14 +299,6 @@ let g:airline#extensions#coc#enabled = 0
 " ====> Gitgutter Settings
 let g:gitgutter_map_keys = 0  " To disable all key mappings:
 
-" " ====> vim-multiple-cursors Settings
-let g:multi_cursor_use_default_mapping=0
-let g:multi_cursor_start_word_key      = '<C-n>'
-let g:multi_cursor_select_all_key      = 'g<C-n>'
-let g:multi_cursor_next_key            = '<C-n>'
-let g:multi_cursor_prev_key            = '<C-p>'
-let g:multi_cursor_skip_key            = '<C-x>'
-let g:multi_cursor_quit_key            = '<Esc>'
 
 " ====> AsyncRun Settings
 let g:asyncrun_open = 8
@@ -326,7 +313,7 @@ augroup END
 function! s:runner_proc(opts)
   let curr_bufnr = floaterm#curr()
   if has_key(a:opts, 'silent') && a:opts.silent == 1
-    call floaterm#hide()
+    call floaterm#hide(1, '')
   endif
   let cmd = 'cd ' . shellescape(getcwd())
   call floaterm#terminal#send(curr_bufnr, [cmd])
@@ -341,6 +328,8 @@ let g:asyncrun_runner.floaterm = function('s:runner_proc')
 
 " ====> floaterm Settings
 let g:floaterm_keymap_toggle = '<leader>t'
+let g:floaterm_width = 0.9
+let g:floaterm_height = 0.9
 
 
 " ====> Vim-Gutentags Settings
@@ -362,15 +351,7 @@ let g:gutentags_ctags_exclude = ["**/env/**","**/__pycache__/**"]
 " Tagbar Settings
 nmap <F8> :TagbarToggle<CR>
 let g:tagbar_sort = 0
-let g:tagbar_width = 30
-
-" Neoterm Settings
-let g:neoterm_default_mod='belowright'
-nmap gx <Plug>(neoterm-repl-send)
-xmap gx <Plug>(neoterm-repl-send)
-nmap gxx <Plug>(neoterm-repl-send-line)
-let g:neoterm_autoscroll=1
-let g:neoterm_size=16 "
+let g:tagbar_width = 50
 
 " ====> easymotion Settings
 let g:EasyMotion_do_mapping = 0
@@ -379,14 +360,6 @@ nmap <Leader>w <Plug>(easymotion-overwin-w)
 let g:EasyMotion_smartcase = 1
 let g:EasyMotion_use_smartsign_us = 1
 
-" ====> vim-slime Settings
-let g:slime_target = "tmux"
-let g:slime_default_config = {"socket_name": get(split($TMUX, ","), 0), "target_pane": "{right}"}
-let g:slime_dont_ask_default = 1
-let g:slime_no_mappings = 1
-nmap <c-c><c-c> <ESC>:1,$SlimeSend<CR>  " Send entire file
-xmap <c-c><c-c> <Plug>SlimeRegionSend
-nmap <c-c>v     <Plug>SlimeConfig
 
 " ====> FZF-vim Settings
 nnoremap <C-p> :Files<Cr>
@@ -427,9 +400,13 @@ endfunction
 augroup auto_test
   autocmd!
   autocmd BufWrite * if test#exists() && g:autotest|
-    \   TestFile -strategy=asyncrun_background |
+    \   TestFile -v -strategy=asyncrun_background |
     \ endif
 augroup END
+nmap <silent> t<C-n> :TestNearest<CR>
+nmap <silent> t<C-f> :TestFile<CR>
+nmap <silent> t<C-s> :TestSuite<CR>
+nmap <silent> t<C-l> :TestLast<CR>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -459,9 +436,14 @@ vmap <leader>s  <Plug>(coc-format-selected)
 nmap <leader>s  <Plug>(coc-format-selected)
 " Show yank history
 nnoremap <silent> <space>y  :<C-u>CocList -A --normal yank<cr>
-" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
-" Coc only does snippet and additional edit on confirm.
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
+" position. Coc only does snippet and additional edit on confirm.
+" <cr> could be remapped by other vim plugin, try `:verbose imap <CR>`.
+if exists('*complete_info')
+  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+else
+  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+endif
 
 " <coc-snippet> settings
 " Use <C-l> for trigger snippet expand.
@@ -490,14 +472,6 @@ command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
 " <coc-explorer> settings
 nmap <space>e :CocCommand explorer<CR>
-
-" <coc-actions> settings
-" Remap for do codeAction of selected region
-function! s:cocActionsOpenFromSelected(type) abort
-  execute 'CocCommand actions.open ' . a:type
-endfunction
-xmap <silent> <leader>a :<C-u>execute 'CocCommand actions.open ' . visualmode()<CR>
-nmap <silent> <leader>a :<C-u>set operatorfunc=<SID>cocActionsOpenFromSelected<CR>g@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ====> coc Settings End
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
