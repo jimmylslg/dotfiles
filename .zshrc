@@ -6,6 +6,8 @@ export ZSH=$HOME/.oh-my-zsh
 export SHELL=/bin/zsh
 # export TERM="xterm-256color"
 # export COLORTERM="truecolor"
+# export LC_ALL=en_US.UTF-8  
+# export LANG=en_US.UTF-8
 
 # load ~/.zshrc.local if exists
 [[ -s $HOME/.zshrc.local ]] && source "$HOME/.zshrc.local"
@@ -86,13 +88,14 @@ plugins=(
 )
 ZSH_DISABLE_COMPFIX="true"
 source $ZSH/oh-my-zsh.sh
+export ZSH_HIGHLIGHT_MAXLENGTH=60
 
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
