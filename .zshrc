@@ -182,3 +182,6 @@ for dump in ~/.zcompdump(N.mh+24); do
 done
 compinit -C
 
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+

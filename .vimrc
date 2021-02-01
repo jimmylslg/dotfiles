@@ -6,6 +6,7 @@ call plug#begin('~/.vim/plugged')
 " Plugins
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'edkolev/tmuxline.vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
@@ -249,7 +250,7 @@ map <leader>e :e! ~/.vimrc<cr>
 autocmd! bufwritepost ~/.vimrc source ~/.config/nvim/init.vim | echo "reloaded"
 
 " ====> Airline Settings
-let g:airline_theme='one'
+let g:airline_theme='powerlineish'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#tab_nr_type = 1 
